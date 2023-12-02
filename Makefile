@@ -2,6 +2,7 @@
 #============ NAME ============#
 
 NAME		=	push_swap
+ARCHIVE		=	push_swap.a
 
 #========= COMPILATOR =========#
 
@@ -38,9 +39,11 @@ makelibft:									#Make Libft
 	cp $(LIBFT_DIR)/$(LIBFT_NAME) .
 	mv $(LIBFT_NAME) $(NAME)
 
+$(ARCHIVE) : $(OBJS)
+	ar -rcs $(ARCHIVE) $^
 
-$(NAME) : makelibft $(OBJS)
-	ar -rcs $(NAME) $(OBJS)
+$(NAME) : makelibft $(ARCHIVE) $(OBJS)
+	$(CC) $< -o $@
 
 %.o : %.c INCLUDE
 	$(CC) $(CFLAGS) -c $< -o $@

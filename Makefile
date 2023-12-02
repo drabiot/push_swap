@@ -14,11 +14,14 @@ GFLAGS		=	$(CFLAGS) -g				#Flag for gdb or valgrind
 
 #========== SOURCES ===========#
 
-SRCS 		=	mainc.c \
+SRCS_DIR	=	src/
+SRCS_FILES 	=	mainc.c \
 				swap_commands.c \
 				push_commands.c \
 				rotate_commands.c \
 				reverse_commands.c
+
+SRCS		=	$(addprefix $(SRCS_DIR),$(SRC_FILES))
 
 INCLUDE		=	./include/push_swap.h		#directory of headers
 LIBFT_DIR	=	./libft/					#Path to Libft

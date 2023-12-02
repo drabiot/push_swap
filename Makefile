@@ -14,11 +14,13 @@ GFLAGS = $(CFLAGS) -g				#Flag for gdb or valgrind
 
 #========== SOURCES ===========#
 
-SRCS = mainc. \
+SRCS = mainc.c \
 	swap_commands.c \
 	push_commands.c \
 	rotate_commands.c \
 	reverse_commands.c
+
+INCLUDE = /include					#directory of headers
 	
 OBJS = $(SRCS:.c=.o)				#Change mandatory .c to .o
 

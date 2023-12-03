@@ -42,10 +42,10 @@ makelibft:									#Make Libft
 $(ARCHIVE) : $(OBJS)
 	ar -rcs $(ARCHIVE) $^
 
-$(NAME) : makelibft $(ARCHIVE) $(OBJS)
+$(NAME) : makelibft $(ARCHIVE)
 	$(CC) $< -o $@
 
-%.o : %.c INCLUDE
+%.o : %.c $(INCLUDE)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean :										#Rule clean (Delete all .o)

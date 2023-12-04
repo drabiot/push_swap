@@ -111,7 +111,7 @@ clean :
 
 fclean :			clean
 					@rm -rf $(NAME)
-					@echo "$(CYAN)Libft executable file cleanned ! $(BASE_COLOR)"
+					@echo "$(CYAN)Libft executable file cleanned! $(BASE_COLOR)"
 
 re :				fclean all
 					@echo "$(GREEN)Cleanned and rebuild Libft! $(BASE_COLOR)"

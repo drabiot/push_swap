@@ -23,6 +23,7 @@ static void	free_array(char **array)
 		i++;
 	}
 	free(array);
+	return (NULL);
 }
 
 static size_t	count_word(char const *s, char sep)
@@ -60,7 +61,7 @@ static char	**fill_array(char const *s, char c, char **array)
 				len = ft_strchr(s, c) - s;
 			array[i] = ft_substr(s, 0, len);
 			if (!array)
-				free_array(array);
+				return (free_array(array));
 			i++;
 			s += len;
 		}

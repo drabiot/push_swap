@@ -6,30 +6,43 @@
 #    By: tchartie <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/11 18:05:50 by tchartie          #+#    #+#              #
-#    Updated: 2023/11/08 16:06:25 by tchartie         ###   ########.fr        #
+#    Updated: 2023/12/04 01:01:23 by tchartie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #============ NAME ============#
 
-NAME			=	libft.a
+NAME		=		libft.a
 
 #========= COMPILATOR =========#
 
-CC				=	clang
+CC			=		clang
 
 #=========== FLAGS ============#
 
-CFLAGS			=	-Wall -Wextra -Werror	#Usual flags
-GFLAGS			=	$(CFLAGS) -g			#Flag for gdb or valgrind
+CFLAGS		=		-Wall -Wextra -Werror	#Usual flags
+GFLAGS		=		$(CFLAGS) -g			#Flag for gdb or valgrind
+
+#=========== COLOR ============#
+
+BASE_COLOR 	=		\033[0;39m
+GRAY 		=		\033[0;90m
+RED 		=		\033[0;91m
+GREEN 		=		\033[0;92m
+YELLOW 		=		\033[0;93m
+BLUE 		=		\033[0;94m
+MAGENTA		=		\033[0;95m
+CYAN 		=		\033[0;96m
+WHITE		=		\033[0;97m
 
 #========== SOURCES ===========#
 
-SRCS_DIR		=	src/					#Directory of srcs
-INCLUDE			=	../include/libft.h		#Directory of header
+INCLUDE		=		src/libft.h				#Directory of header
 
-FT_CTYPE_DIR 	= 	ft_ctype/
-FT_CTYPE 		= 	ft_isalpha.c \
+SRCS_DIR	=		src/
+OBJS_DIR	=		obj/
+
+SRCS 		= 		ft_isalpha.c \
 					ft_isdigit.c \
 					ft_isalnum.c \
 					ft_isascii.c \
@@ -37,16 +50,12 @@ FT_CTYPE 		= 	ft_isalpha.c \
 					ft_toupper.c \
 					ft_tolower.c \
 					ft_atoi.c \
-					ft_itoa.c
-
-FT_FDTYPE_DIR	=	ft_fdtype/
-FT_FDTYPE		=	ft_putchar_fd.c \
+					ft_itoa.c \
+					ft_putchar_fd.c \
 					ft_putstr_fd.c \
 					ft_putendl_fd.c \
-					ft_putnbr_fd.c
-
-FT_LSTTYPE_DIR	=	ft_lsttype/
-FT_LSTTYPE		=	ft_lstnew.c \
+					ft_putnbr_fd.c \
+					ft_lstnew.c \
 					ft_lstadd_front.c \
 					ft_lstadd_back.c \
 					ft_lstsize.c \
@@ -54,19 +63,15 @@ FT_LSTTYPE		=	ft_lstnew.c \
 					ft_lstdelone.c \
 					ft_lstclear.c \
 					ft_lstiter.c \
-					ft_lstmap.c
-
-FT_MEMTYPE_DIR	=	ft_memtype/
-FT_MEMTYPE		=	ft_memset.c \
+					ft_lstmap.c \
+					ft_memset.c \
 					ft_bzero.c \
 					ft_memcpy.c \
 					ft_memmove.c \
 					ft_memchr.c \
 					ft_memcmp.c \
-					ft_calloc.c
-
-FT_STRTYPE_DIR	=	ft_strtype/
-FT_STRTYPE		=	ft_strlen.c \
+					ft_calloc.c \
+					ft_strlen.c \
 					ft_strlcpy.c \
 					ft_strlcat.c \
 					ft_strchr.c \
@@ -81,32 +86,34 @@ FT_STRTYPE		=	ft_strlen.c \
 					ft_strmapi.c \
 					ft_striteri.c
 
-SRC_FILES		+=	$(addprefix $(FT_CTYPE_DIR),$(FT_CTYPE))
-SRC_FILES		+=	$(addprefix $(FT_FDTYPE_DIR),$(FT_FDTYPE))
-SRC_FILES		+=	$(addprefix $(FT_LSTTYPE_DIR),$(FT_LSTTYPE))
-SRC_FILES		+=	$(addprefix $(FT_MEMTYPE_DIR),$(FT_MEMTYPE))
-SRC_FILES		+=	$(addprefix $(FT_STRTYPE_DIR),$(FT_STRTYPE))
+OBJS		=		$(SRCS:.c=.o)
 
-SRCS			=	$(addprefix $(SRCS_DIR),$(SRC_FILES))
-
-OBJS = $(SRCS:.c=.o)						#Change madatory .c to .o
+SRCS_F		=		$(addprefix $(SRCS_DIR),$(SRCS))
+OBJS_F		=		$(addprefix $(OBJS_DIR),$(OBJS))
 
 #========= EXECUTABLE =========#
 
-all : $(NAME)
+all : 				$(NAME)
 
-$(NAME) : $(OBJS)
-	ar -rcs $(NAME) $(OBJS)
+$(NAME) : 			$(OBJS_F)
+					@ar -rcs $(NAME) $(OBJS_F)
+					@echo "$(GREEN)Libft successfully compiled! $(BASE_COLOR)"
 
-%.o : %.c INCLUDE
-	$(CC) $(CFLAGS) -c $< -o $@
+$(OBJS_DIR)%.o : 	$(SRCS_DIR)%.c $(INCLUDE)
+					@mkdir -p $(OBJS_DIR)
+					@echo "$(YELLOW)Compilating: $< $(BASE_COLOR)"
+					@$(CC) $(CFLAGS) -c $< -o $@
 
-clean :										#Rule clean (Delete all .o)
-	rm -rf $(OBJS)
 
-fclean : clean								#Rule fclean (clean all)
-	rm -rf $(NAME)
+clean :
+					@rm -rf $(OBJS_DIR)
+					@echo "$(BLUE)Libft objects files cleanned! $(BASE_COLOR)"
 
-re : fclean all								#Rule re
+fclean :			clean
+					@rm -rf $(NAME)
+					@echo "$(CYAN)Libft executable file cleanned ! $(BASE_COLOR)"
+
+re :				fclean all
+					@echo "$(GREEN)Cleanned and rebuild Libft! $(BASE_COLOR)"
 	
-.PHONY : all clean fclean re
+.PHONY :			all clean fclean re

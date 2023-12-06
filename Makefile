@@ -40,8 +40,8 @@ WHITE		=		\033[0;97m
 
 INCLUDE		=		src/push_swap.h			#Directory of headers
 
-LIBFT_DIR	=		libft/					#Path to Libft
-LIBFT_NAME	=		libft.a					#Name of Libft
+LIBFT_DIR	=		libft
+LIBFT_NAME	=		libft.a
 
 SRCS_DIR	=		src/
 OBJS_DIR	=		obj/
@@ -50,7 +50,7 @@ SRCS		=		main.c \
 					swap_commands.c \
 					push_commands.c \
 					rotate_commands.c \
-					reverse_commands.c
+					reverse_rotate_commands.c
 
 OBJS		=		$(SRCS:.c=.o)
 
@@ -63,21 +63,29 @@ OBJS_F		=		$(addprefix $(OBJS_DIR),$(OBJS))
 all :				$(NAME)
 
 makelibft:
-					make -C $(LIBFT_DIR)
-					cp $(LIBFT_DIR)$(LIBFT_NAME) .
-					mv $(LIBFT_NAME) $(NAME)
+					@make -C $(LIBFT_DIR) all --no-print-directory
 
 $(NAME) : 			$(OBJS_F) | makelibft
-					$(CC)  $(OBJS_F) -o $(NAME) -L$(LIBFT_DIR) -lft $(OBJS_F)
+					@$(CC) $(OBJS_F) -o $(NAME) -Llibft -lft
+					@echo "$(GREEN)Push_swap successfully compiled! $(BASE_COLOR)"
 
-%.o : 				%.c $(INCLUDE)
-					$(CC) $(CFLAGS) -c $< -o $@
+$(OBJS_DIR)%.o :	$(SRCS_DIR)%.c $(INCLUDE)
+					@mkdir -p $(OBJS_DIR)
+					@echo "$(YELLOW)Compilating: $< $(BASE_COLOR)"
+					@$(CC) $(CFLAGS) -c $< -o $@
 
 clean :
-					rm -rf $(OBJS)
+					@rm -rf $(OBJS_DIR)
+					@make -C $(LIBFT_DIR) clean --no-print-directory
+					@echo "$(BLUE)Push_swap objects files cleanned! $(BASE_COLOR)"
 
-fclean :			clean
-					rm -rf $(NAME)
+fclean :
+					@rm -rf $(OBJS_DIR)
+					@echo "$(BLUE)Push_swap objects files cleanned! $(BASE_COLOR)"
+					@rm -rf $(NAME)
+					@make -C $(LIBFT_DIR) fclean --no-print-directory
+					@echo "$(CYAN)Push_swap executable file cleanned! $(BASE_COLOR)"
+					
 
 re :				fclean all
 

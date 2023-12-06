@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-static void	free_array(char **array)
+static char	**free_array(char **array)
 {
 	size_t	i;
 

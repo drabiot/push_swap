@@ -13,7 +13,6 @@
 #============ NAME ============#
 
 NAME		=		push_swap
-ARCHIVE		=		push_swap.a
 
 #========= COMPILATOR =========#
 
@@ -62,7 +61,7 @@ OBJS_F		=		$(addprefix $(OBJS_DIR),$(OBJS))
 
 all :				$(NAME)
 
-makelibft:
+makelibft :
 					@make -C $(LIBFT_DIR) all --no-print-directory
 
 $(NAME) : 			$(OBJS_F) | makelibft
@@ -71,7 +70,7 @@ $(NAME) : 			$(OBJS_F) | makelibft
 
 $(OBJS_DIR)%.o :	$(SRCS_DIR)%.c $(INCLUDE)
 					@mkdir -p $(OBJS_DIR)
-					@echo "$(YELLOW)Compilating: $< $(BASE_COLOR)"
+					@echo "$(YELLOW)Compiling: $< $(BASE_COLOR)"
 					@$(CC) $(CFLAGS) -c $< -o $@
 
 clean :

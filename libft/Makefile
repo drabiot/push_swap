@@ -101,7 +101,7 @@ $(NAME) : 			$(OBJS_F)
 
 $(OBJS_DIR)%.o : 	$(SRCS_DIR)%.c $(INCLUDE)
 					@mkdir -p $(OBJS_DIR)
-					@echo "$(YELLOW)Compilating: $< $(BASE_COLOR)"
+					@echo "$(YELLOW)Compiling: $< $(BASE_COLOR)"
 					@$(CC) $(CFLAGS) -c $< -o $@
 
 

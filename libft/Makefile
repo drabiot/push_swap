@@ -50,6 +50,7 @@ SRCS 		= 		ft_isalpha.c \
 					ft_toupper.c \
 					ft_tolower.c \
 					ft_atoi.c \
+					ft_atol.c \
 					ft_itoa.c \
 					ft_putchar_fd.c \
 					ft_putstr_fd.c \

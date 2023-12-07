@@ -205,6 +205,8 @@ char	*ft_strnstr(const char *s1, const char *s2, size_t len);
 
 int		ft_atoi(const char *str);
 
+long	ft_atol(const char *str);
+
 /* ****************************************** */
 /*                ft_calloc.c                 */
 /* allocates size bytes and returns a pointer */

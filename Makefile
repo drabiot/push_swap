@@ -46,6 +46,8 @@ SRCS_DIR	=		src/
 OBJS_DIR	=		obj/
 
 SRCS		=		main.c \
+					append_stack.c \
+					error_check.c \
 					swap_commands.c \
 					push_commands.c \
 					rotate_commands.c \

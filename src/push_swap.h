@@ -1,9 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tchartie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/07 15:52:16 by tchartie          #+#    #+#             */
+/*   Updated: 2023/12/07 15:54:50 by tchartie         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
 # include <unistd.h>
 # include <stdlib.h>
+
+typedef struct s_stack_node
+{
+	int					value;
+	struct s_stack_node	*next;
+}						t_stack_node;
 
 /* ********************************************************** */
 /*                                                            */
@@ -17,7 +34,7 @@
 /*              given arguments               */
 /* ****************************************** */
 
-void	init_stack(char **argv);
+void					stack_init(t_stack_node **a, char **argv);
 
 /* ********************************************************** */
 /*                                                            */
@@ -30,7 +47,7 @@ void	init_stack(char **argv);
 /*     Check if given arguments are good      */
 /* ****************************************** */
 
-int		error_syntax(char *arg);
+int						error_syntax(char *arg);
 
 /* ****************************************** */
 /*             error_repetition()             */
@@ -38,12 +55,14 @@ int		error_syntax(char *arg);
 /*              the same number               */
 /* ****************************************** */
 
-int		error_repetition(int *stack, int nb);
+int						error_repetition(t_stack_node *a, int nb);
 
+void					error(t_stack_node **stack, char **argv);
+
+void	display_stack(t_stack_node *stack);
 /* ********************************************************** */
 /*                                                            */
 /*                     Push_Swap Commands                     */
 /*                                                            */
 /* ********************************************************** */
-
 #endif //PUSH_SWAP_H

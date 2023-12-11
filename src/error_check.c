@@ -5,12 +5,53 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tchartie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/07 19:29:04 by tchartie          #+#    #+#             */
-/*   Updated: 2023/12/07 19:34:21 by tchartie         ###   ########.fr       */
+/*   Created: 2023/12/07 17:09:59 by tchartie          #+#    #+#             */
+/*   Updated: 2023/12/07 18:15:18 by tchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+static void	free_stack(t_stack_node **stack)
+{
+	t_stack_node	*tmp;
+	t_stack_node	*current;
+	
+	if (!stack)
+		return ;
+	current = *stack;
+	while (current)
+	{
+		tmp = current->next;
+		free(current);
+		current = tmp;
+	}
+	*stack = NULL;
+}
+
+static void	free_matrix(char **argv)
+{
+	int	i;
+
+	i = -1;
+	if (!argv || !*argv)
+		return ;
+	while (argv[i])
+	{
+		free(argv[i]);
+		i++;
+	}
+	free(argv - 1);
+}
+
+void	error(t_stack_node **stack, char **argv)
+{
+	free_stack(stack);
+	free_matrix(argv);
+	write(2, "Error\n", 6);
+	exit(1);
+	
+}
 
 int	error_syntax(char *arg)
 {
@@ -32,16 +73,15 @@ int	error_syntax(char *arg)
 	return (0);
 }
 
-int	error_repetition(int *stack, int nb)
+int	error_repetition(t_stack_node *a, int nb)
 {
-	int	i;
-
-	i = 0;
-	while (stack[i])
+	if (!a)
+		return (0);
+	while (a)
 	{
-		if (stack[i] == nb)
+		if (a->value == nb)
 			return (1);
-		i++;
+		a = a->next;
 	}
 	return (0);
 }

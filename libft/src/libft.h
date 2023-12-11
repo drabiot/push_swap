@@ -121,6 +121,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 /*          NUL-terminate the result          */
 /* ****************************************** */
 
+char	*ft_strcat(char const *s1, char const *s2, char *array);
 size_t	ft_strlcat(char *dst, const char *src, size_t size);
 
 /* ****************************************** */

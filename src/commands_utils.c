@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   commands_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tchartie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/02 19:05:24 by tchartie          #+#    #+#             */
-/*   Updated: 2023/11/07 13:34:59 by tchartie         ###   ########.fr       */
+/*   Created: 2023/12/11 23:07:59 by tchartie          #+#    #+#             */
+/*   Updated: 2023/12/11 23:10:25 by tchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+int	size_stack(t_stack_node *stack)
 {
-	char	*buffer;
-	size_t	len_s1;
-	size_t	len_s2;
+	int	size;
 
-	len_s1 = ft_strlen(s1);
-	len_s2 = ft_strlen(s2);
-	if (!s1)
-		buffer = (char *)malloc(sizeof(char) * (len_s2 + 1));
-	else
-		buffer = (char *)malloc(sizeof(char) * (len_s1 + len_s2 + 1));
-	if (!buffer)
-		return (NULL);
-	buffer = ft_strcat(s1, s2, buffer);
-	return (buffer);
+	size = 0;
+	if (!stack)
+		return (0);
+	while (stack)
+	{
+		size++;
+		stack = stack->next;
+	}
+	return (size);
 }

@@ -17,7 +17,7 @@ static void	append_node(t_stack_node **stack, int nb)
 {
 	t_stack_node	*current_node;
 	t_stack_node	*last_node;
-	
+
 	if (!stack)
 		return ;
 	current_node = (t_stack_node *)malloc(sizeof(t_stack_node));

@@ -16,7 +16,7 @@ static void	free_stack(t_stack_node **stack)
 {
 	t_stack_node	*tmp;
 	t_stack_node	*current;
-	
+
 	if (!stack)
 		return ;
 	current = *stack;
@@ -33,7 +33,7 @@ static void	free_matrix(char **argv)
 {
 	int	i;
 
-	i = -1;
+	i = 0;
 	if (!argv || !*argv)
 		return ;
 	while (argv[i])
@@ -41,7 +41,7 @@ static void	free_matrix(char **argv)
 		free(argv[i]);
 		i++;
 	}
-	free(argv - 1);
+	free(argv);
 }
 
 void	error(t_stack_node **stack, char **argv)
@@ -50,7 +50,6 @@ void	error(t_stack_node **stack, char **argv)
 	free_matrix(argv);
 	write(2, "Error\n", 6);
 	exit(1);
-	
 }
 
 int	error_syntax(char *arg)
@@ -60,7 +59,7 @@ int	error_syntax(char *arg)
 	i = 0;
 	if (!(arg[i] == '+' || arg[i] == '-' || (arg[i] >= '0' && arg[i] <= '9')))
 		return (1);
-	if ((arg[i] == '+' || arg[i] == '-') 
+	if ((arg[i] == '+' || arg[i] == '-')
 		&& !(arg[i + 1] >= '0' && arg[i + 1] <= '9'))
 		return (1);
 	i++;

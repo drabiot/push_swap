@@ -12,6 +12,9 @@
 
 #include "libft.h"
 
+/*
+** Free the given matrix
+*/
 static char	**free_array(char **array)
 {
 	size_t	i;
@@ -26,6 +29,11 @@ static char	**free_array(char **array)
 	return (NULL);
 }
 
+/*
+** Count numbers of word (a word is consider like that when surround 
+** by separators or when there starting or finishing a string) of 
+** given string
+*/
 static size_t	count_word(char const *s, char sep)
 {
 	size_t	nb_word;
@@ -43,6 +51,9 @@ static size_t	count_word(char const *s, char sep)
 	return (nb_word);
 }
 
+/*
+** Fill given matrix with given arguments
+*/
 static char	**fill_array(char const *s, char c, char **array)
 {
 	size_t	len;
@@ -70,6 +81,12 @@ static char	**fill_array(char const *s, char c, char **array)
 	return (array);
 }
 
+/*
+** Allocates & returns an array
+** of strings obtained by splitting ’s’ using the
+** character ’c’ as a delimiter. The array must end
+** with a NULL pointer
+*/
 char	**ft_split(char const *s, char c)
 {
 	char	**array;

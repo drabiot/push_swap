@@ -12,12 +12,18 @@
 
 #include "libft.h"
 
+/*
+** Outputs the character ’c’ to the given file descriptor
+*/
 static void	ft_putchar(char c, int fd)
 {
 	c = c + '0';
 	write(fd, &c, 1);
 }
 
+/*
+** Outputs the integer ’n’ to the given file descriptor
+*/
 void	ft_putnbr_fd(int n, int fd)
 {
 	if (n == -2147483648)

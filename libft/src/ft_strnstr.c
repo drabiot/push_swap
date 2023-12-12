@@ -12,6 +12,10 @@
 
 #include "libft.h"
 
+/*
+** Locates the first occurence of the null-terminated string big,
+** where not more than len characters are searched
+*/
 char	*ft_strnstr(const char *s1, const char *s2, size_t len)
 {
 	size_t	i;

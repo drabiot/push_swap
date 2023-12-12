@@ -12,6 +12,9 @@
 
 #include "libft.h"
 
+/*
+** Concatenate two given strings
+*/
 char	*ft_strcat(char const *s1, char const *s2, char *array)
 {
 	size_t	i;

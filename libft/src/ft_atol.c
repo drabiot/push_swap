@@ -12,6 +12,9 @@
 
 #include "libft.h"
 
+/*
+** Converts the initial portion of the string to a long
+*/
 long	ft_atol(const char *str)
 {
 	int		i;

@@ -12,6 +12,10 @@
 
 #include "libft.h"
 
+/*
+** Returns an integer less than, equal to, or greater than zero
+** if the first n bytes of s1 is found
+*/
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
 	size_t			i;

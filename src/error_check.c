@@ -12,6 +12,9 @@
 
 #include "push_swap.h"
 
+/*
+** Free the given stack
+*/
 static void	free_stack(t_stack_node **stack)
 {
 	t_stack_node	*tmp;
@@ -29,6 +32,9 @@ static void	free_stack(t_stack_node **stack)
 	*stack = NULL;
 }
 
+/*
+** Free the given matrix & its arrays
+*/
 static void	free_matrix(char **argv)
 {
 	int	i;
@@ -44,6 +50,9 @@ static void	free_matrix(char **argv)
 	free(argv);
 }
 
+/*
+** Return errors & free the memory of the stack and the matrix given
+*/
 void	error(t_stack_node **stack, char **argv)
 {
 	free_stack(stack);
@@ -52,6 +61,9 @@ void	error(t_stack_node **stack, char **argv)
 	exit(1);
 }
 
+/*
+** Check if given arguments are well-written
+*/
 int	error_syntax(char *arg)
 {
 	int	i;
@@ -72,6 +84,9 @@ int	error_syntax(char *arg)
 	return (0);
 }
 
+/*
+** Check if there are not two times the same number
+*/
 int	error_repetition(t_stack_node *a, int nb)
 {
 	if (!a)

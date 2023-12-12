@@ -12,6 +12,10 @@
 
 #include "libft.h"
 
+/*
+** Allocates size bytes and returns a pointer
+** to the allocated memory
+*/
 void	*ft_calloc(size_t nmemb, size_t size)
 {
 	unsigned char	*tab;

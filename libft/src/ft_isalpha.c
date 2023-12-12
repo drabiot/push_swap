@@ -12,6 +12,10 @@
 
 #include "libft.h"
 
+/*
+** Checks for an aphabetic character wich are neither
+** uppsercase nor lowercase
+*/
 int	ft_isalpha(int c)
 {
 	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))

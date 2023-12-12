@@ -13,29 +13,34 @@
 #include "push_swap.h"
 #include "../libft/src/libft.h"
 
+/*
+** Create a node & add it on top of the stack
+*/
 static void	append_node(t_stack_node **stack, int nb)
 {
-	t_stack_node	*current_node;
-	t_stack_node	*last_node;
+	t_stack_node	*current;
+	t_stack_node	*last;
 
 	if (!stack)
 		return ;
-	current_node = (t_stack_node *)malloc(sizeof(t_stack_node));
-	if (!current_node)
+	current = (t_stack_node *)malloc(sizeof(t_stack_node));
+	if (!current)
 		return ;
-	current_node->next = NULL;
-	current_node->value = nb;
+	current->next = NULL;
+	current->value = nb;
 	if (!*stack)
-		*stack = current_node;
+		*stack = current;
 	else
 	{
-		last_node = *stack;
-		while (last_node->next)
-			last_node = last_node->next;
-		last_node->next = current_node;
+		last = last_node(*stack);
+		last->next = current;
 	}
 }
 
+/*
+** Check the given arguments & Initialize the 
+** given stack with the given arguments
+*/
 void	stack_init(t_stack_node **a, char **argv)
 {
 	long	nbr;

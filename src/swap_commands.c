@@ -12,6 +12,9 @@
 
 #include "push_swap.h"
 
+/*
+** Swap the first two elements of the given stack
+*/
 static void	swap(t_stack_node **stack)
 {
 	int				len_stack;
@@ -34,16 +37,25 @@ static void	swap(t_stack_node **stack)
 	head->value = tmp;
 }
 
+/*
+** Swap the first two elements of stack a
+*/
 void	swap_a(t_stack_node **a)
 {
 	swap(a);
 }
 
+/*
+** Swap the first two elements of stack b
+*/
 void	swap_b(t_stack_node **b)
 {
 	swap(b);
 }
 
+/*
+** Swap the first two elements of the two stacks a & b
+*/
 void	swap_all(t_stack_node **a, t_stack_node **b)
 {
 	swap(a);

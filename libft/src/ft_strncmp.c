@@ -12,6 +12,13 @@
 
 #include "libft.h"
 
+/*
+** Compares the two given strings & returns an integer
+** indicating the result of the comparison
+**  •0, if the s1 and s2 are equal
+**  •a negative value if s1 is less than s2
+**  •a positive value if s1 is greater than s2
+*/
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
 	size_t			i;

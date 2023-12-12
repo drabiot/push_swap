@@ -12,6 +12,10 @@
 
 #include "libft.h"
 
+/*
+** If character is an uppercase letter, returns
+** its lowercase equivalent
+*/
 int	ft_tolower(int c)
 {
 	if (c >= 'A' && c <= 'Z')

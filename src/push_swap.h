@@ -33,7 +33,6 @@ typedef struct s_stack_node
 /*    Initialize the given stack with the     */
 /*              given arguments               */
 /* ****************************************** */
-
 void					stack_init(t_stack_node **a, char **argv);
 
 /* ********************************************************** */
@@ -44,9 +43,8 @@ void					stack_init(t_stack_node **a, char **argv);
 
 /* ****************************************** */
 /*               error_syntax()               */
-/*     Check if given arguments are good      */
+/* Check if given arguments are well-written  */
 /* ****************************************** */
-
 int						error_syntax(char *arg);
 
 /* ****************************************** */
@@ -54,7 +52,6 @@ int						error_syntax(char *arg);
 /*      Check if there are not two times      */
 /*              the same number               */
 /* ****************************************** */
-
 int						error_repetition(t_stack_node *a, int nb);
 
 /* ****************************************** */
@@ -62,7 +59,6 @@ int						error_repetition(t_stack_node *a, int nb);
 /*         Return errors and free the         */
 /*     memory of the stack and the matrix     */
 /* ****************************************** */
-
 void					error(t_stack_node **stack, char **argv);
 
 /* ********************************************************** */
@@ -76,15 +72,34 @@ void					error(t_stack_node **stack, char **argv);
 /*           Count the total number           */
 /*            of nodes in a stack             */
 /* ****************************************** */
-
 int						size_stack(t_stack_node *stack);
+
+/* ****************************************** */
+/*                last_node()                 */
+/*          Return the last node of           */
+/*              the given stack               */
+/* ****************************************** */
+t_stack_node			*last_node(t_stack_node *stack);
+
+/* ****************************************** */
+/*                add_front()                 */
+/*     Add a new node in the front (tail)     */
+/*              of a given stack              */
+/* ****************************************** */
+void					add_front(t_stack_node **stack, t_stack_node *new);
+
+/* ****************************************** */
+/*                add_fback()                 */
+/*     Add a new node in the back (head)      */
+/*              of a given stack              */
+/* ****************************************** */
+void					add_back(t_stack_node **stack, t_stack_node *new);
 
 /* ****************************************** */
 /*                   swap()                   */
 /*        Swap the first two elements         */
 /*                of the stack                */
 /* ****************************************** */
-
 void					swap_a(t_stack_node **a);
 void					swap_b(t_stack_node **b);
 void					swap_all(t_stack_node **a, t_stack_node **b);
@@ -95,7 +110,6 @@ void					swap_all(t_stack_node **a, t_stack_node **b);
 /*       of a stack & put it at the top       */
 /*             of an other stack              */
 /* ****************************************** */
-
 void					push_a(t_stack_node **a, t_stack_node **b);
 void					push_b(t_stack_node **b, t_stack_node **a);
 
@@ -104,8 +118,6 @@ void					push_b(t_stack_node **b, t_stack_node **a);
 /*          Shift up all elements of          */
 /*               the stack by 1               */
 /* ****************************************** */
-
-void					rotate(t_stack_node **stack);
 void					rotate_a(t_stack_node **a);
 void					rotate_b(t_stack_node **b);
 void					rotate_all(t_stack_node **a, t_stack_node **b);
@@ -115,7 +127,6 @@ void					rotate_all(t_stack_node **a, t_stack_node **b);
 /*         Shift down all elements of         */
 /*              the stack by 1.               */
 /* ****************************************** */
-
 void					reverse_rotate_a(t_stack_node **a);
 void					reverse_rotate_b(t_stack_node **b);
 void					reverse_rotate_all(t_stack_node **a, t_stack_node **b);

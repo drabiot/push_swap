@@ -12,6 +12,10 @@
 
 #include "libft.h"
 
+/*
+** Concatenate two given strings. Take the full size of
+** the buffer and guarantee to NUL-terminate the result
+*/
 size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
 	size_t	dst_len;

@@ -12,6 +12,9 @@
 
 #include "libft.h"
 
+/*
+** Calculate the power of a given integer
+*/
 static int	ft_find_power(int nb)
 {
 	int	pow;
@@ -25,6 +28,9 @@ static int	ft_find_power(int nb)
 	return (pow);
 }
 
+/*
+** Transform an integer into a string
+*/
 static char	*ft_putnbr(int nb, char *arr)
 {
 	int	pow;
@@ -49,6 +55,9 @@ static char	*ft_putnbr(int nb, char *arr)
 	return (arr);
 }
 
+/*
+** Calculate the len of the given integer
+*/
 static int	ft_size(int nb)
 {
 	int	i;
@@ -64,6 +73,11 @@ static int	ft_size(int nb)
 	return (i);
 }
 
+/*
+** Allocates & returns a string
+** representing the integer received as an argument.
+** Negative numbers must be handled
+*/
 char	*ft_itoa(int n)
 {
 	int		i;

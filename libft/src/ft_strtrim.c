@@ -12,6 +12,9 @@
 
 #include "libft.h"
 
+/*
+** Trim the beginning of the string
+*/
 static int	trim_start(char const *s1, char const *set)
 {
 	size_t	i;
@@ -28,6 +31,9 @@ static int	trim_start(char const *s1, char const *set)
 	return (i);
 }
 
+/*
+** Trim the end of the string
+*/
 static int	trim_end(char const *s1, char const *set)
 {
 	size_t	i;
@@ -44,6 +50,11 @@ static int	trim_end(char const *s1, char const *set)
 	return (len - i);
 }
 
+/*
+** Allocates & returns a copy of
+** ’s1’ with the characters specified in ’set’ removed
+** from the beginning and the end of the string
+*/
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	char	*new_s;

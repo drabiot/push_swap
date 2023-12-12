@@ -12,6 +12,9 @@
 
 #include "libft.h"
 
+/*
+** Converts the initial portion of the string to an integer
+*/
 int	ft_atoi(const char *str)
 {
 	int	i;

@@ -46,4 +46,9 @@ int	main(int argc, char **argv)
 	display_stack(a);
 	printf("\nb => ");
 	display_stack(b);
+	reverse_rotate_a(&a);
+	printf("\na => ");
+	display_stack(a);
+	printf("\nb => ");
+	display_stack(b);
 }

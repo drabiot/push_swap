@@ -96,6 +96,8 @@ void					swap_all(t_stack_node **a, t_stack_node **b);
 /*             of an other stack              */
 /* ****************************************** */
 
+void					push_a(t_stack_node **a, t_stack_node **b);
+void					push_b(t_stack_node **b, t_stack_node **a);
 
 /* ****************************************** */
 /*                  rotate()                  */
@@ -103,6 +105,7 @@ void					swap_all(t_stack_node **a, t_stack_node **b);
 /*               the stack by 1               */
 /* ****************************************** */
 
+void					rotate(t_stack_node **stack);
 void					rotate_a(t_stack_node **a);
 void					rotate_b(t_stack_node **b);
 void					rotate_all(t_stack_node **a, t_stack_node **b);
@@ -113,7 +116,9 @@ void					rotate_all(t_stack_node **a, t_stack_node **b);
 /*              the stack by 1.               */
 /* ****************************************** */
 
-
+void					reverse_rotate_a(t_stack_node **a);
+void					reverse_rotate_b(t_stack_node **b);
+void					reverse_rotate_all(t_stack_node **a, t_stack_node **b);
 
 void	display_stack(t_stack_node *stack);
 

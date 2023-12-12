@@ -42,8 +42,8 @@ int	main(int argc, char **argv)
 	if (argc == 2)
 		argv = ft_split(argv[1], ' ');
 	stack_init(&a, argv);
+	printf("\na => ");
 	display_stack(a);
-	printf("\n");
-	swap_a(&a);
-	display_stack(a);
+	printf("\nb => ");
+	display_stack(b);
 }

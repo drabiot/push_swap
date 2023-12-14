@@ -19,7 +19,12 @@
 typedef struct s_stack_node
 {
 	int					value;
+	int					cheapest;
+	int					push_price;
+	int					current_pos;
+	int					above_median;
 	struct s_stack_node	*next;
+	struct s_stack_node	*target;
 }						t_stack_node;
 
 /* ********************************************************** */
@@ -66,6 +71,8 @@ void					error(t_stack_node **stack, char **argv);
 /*                     Push_Swap Commands                     */
 /*                                                            */
 /* ********************************************************** */
+
+t_stack_node			*find_smallest(t_stack_node *stack);
 
 /* ****************************************** */
 /*                size_stack()                */
@@ -131,6 +138,15 @@ void					reverse_rotate_a(t_stack_node **a);
 void					reverse_rotate_b(t_stack_node **b);
 void					reverse_rotate_all(t_stack_node **a, t_stack_node **b);
 
-void	display_stack(t_stack_node *stack);
+int						is_sorted(t_stack_node *stack);
+void					tiny_sort(t_stack_node **stack);
+
+void    sort(t_stack_node **a, t_stack_node **b);
+void	init_stack_utils(t_stack_node **a, t_stack_node **b);
+
+void	set_position_node(t_stack_node **stack);
+void	set_target_node(t_stack_node *a, t_stack_node *b);
+void	set_price_node(t_stack_node *a, t_stack_node *b);
+void	set_cheapest_node(t_stack_node **stack);
 
 #endif //PUSH_SWAP_H

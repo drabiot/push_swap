@@ -15,6 +15,26 @@
 
 #include <stdio.h>
 
+static char *create_array(int argc, char **argv)
+{
+	char	*array;
+	int		i;
+	
+	array = NULL;
+	i = 1;
+	if (argc > 2)
+	{
+		while (i < argc)
+		{
+			array = ft_strjoin(array, argv[i]);
+			array = ft_strjoin(array, " ");
+			i++;
+		}
+		
+	}
+	return (array);
+}
+
 int	main(int argc, char **argv)
 {
 	t_stack_node	*a;
@@ -25,30 +45,17 @@ int	main(int argc, char **argv)
 	a = NULL;
 	b = NULL;
 	array = NULL;
-	i = 1;
+	i = argc - 1;
 	if (argc == 1 || (argc == 2 && !argv[1][0]))
 		return (1);
-	else if (argc > 2)
-	{
-		while (i < argc)
-		{
-			array = ft_strjoin(array, argv[i]);
-			array = ft_strjoin(array, " ");
-			i++;
-		}
-		argv[1] = array;
-		argc = 2;
-	}
+	argv[1] = create_array(argc, argv);
+	argc = 2;
 	if (argc == 2)
 		argv = ft_split(argv[1], ' ');
+		
+		
+		
 	stack_init(&a, argv);
-	printf("\na => ");
-	display_stack(a);
-	printf("\nb => ");
-	display_stack(b);
-	reverse_rotate_a(&a);
-	printf("\na => ");
-	display_stack(a);
-	printf("\nb => ");
-	display_stack(b);
+	init_stack_utils(&a, &b);
+	sort(&a, &b);
 }

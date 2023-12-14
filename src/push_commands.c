@@ -19,27 +19,13 @@
 static void	push(t_stack_node **dst, t_stack_node **src)
 {
 	t_stack_node	*node_to_push;
-	t_stack_node	*current;
 
 	if (!src || !*src)
 		return ;
-	if (!(*src)->next)
-	{
-		node_to_push = *src;
-		*src = NULL;
-		node_to_push->next = *dst;
-		*dst = node_to_push;
-	}
-	else
-	{
-		current = *src;
-		while (current->next->next)
-			current = current->next;
-		node_to_push = current->next;
-		current->next = NULL;
-		node_to_push->next = *dst;
-		*dst = node_to_push;
-	}
+	node_to_push = *src;
+	*src = (*src)->next;
+	node_to_push->next = *dst;
+	*dst = node_to_push;
 	
 }
 /*
@@ -49,6 +35,7 @@ static void	push(t_stack_node **dst, t_stack_node **src)
 void	push_a(t_stack_node **a, t_stack_node **b)
 {
 	push(a, b);
+	write (1, "pa\n", 3);
 }
 
 /*
@@ -58,5 +45,6 @@ void	push_a(t_stack_node **a, t_stack_node **b)
 void	push_b(t_stack_node **b, t_stack_node **a)
 {
 	push(b, a);
+	write (1, "pb\n", 3);
 }
 

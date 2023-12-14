@@ -12,6 +12,26 @@
 
 #include "push_swap.h"
 
+t_stack_node	*find_smallest(t_stack_node *stack)
+{
+	t_stack_node	*smallest_node;
+	int		smallest;
+	
+	if (!stack)
+		return (NULL);
+	smallest = 2147483647;
+	while (stack)
+	{
+		if (stack->value < smallest)
+		{
+			smallest = stack->value;
+			smallest_node = stack;
+		}
+		stack = stack->next;
+	}
+	return (smallest_node);
+}
+
 /*
 ** Count the total number of nodes in a given stack
 */

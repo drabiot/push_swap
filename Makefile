@@ -48,12 +48,14 @@ OBJS_DIR	=		obj/
 SRCS		=		main.c \
 					append_stack.c \
 					error_check.c \
-					display.c \
 					commands_utils.c \
 					swap_commands.c \
 					push_commands.c \
 					rotate_commands.c \
-					reverse_rotate_commands.c
+					reverse_rotate_commands.c \
+					sort.c \
+					sort_utils.c \
+					tiny_sort.c
 
 OBJS		=		$(SRCS:.c=.o)
 

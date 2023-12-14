@@ -20,7 +20,7 @@ void	display_stack(t_stack_node *stack)
 	current_node = stack;
 	while (current_node)
 	{
-		printf("%d -> ", current_node->value);
+		printf("%d->", current_node->value);
 		current_node = current_node->next;
 	}
 }

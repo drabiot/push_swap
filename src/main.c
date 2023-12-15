@@ -30,9 +30,9 @@ static char *create_array(int argc, char **argv)
 			array = ft_strjoin(array, " ");
 			i++;
 		}
-		
+		return (array);	
 	}
-	return (array);
+	return(argv[1]);
 }
 
 int	main(int argc, char **argv)
@@ -40,22 +40,22 @@ int	main(int argc, char **argv)
 	t_stack_node	*a;
 	t_stack_node	*b;
 	char			*array;
-	int				i;
 
 	a = NULL;
 	b = NULL;
 	array = NULL;
-	i = argc - 1;
 	if (argc == 1 || (argc == 2 && !argv[1][0]))
 		return (1);
 	argv[1] = create_array(argc, argv);
-	argc = 2;
-	if (argc == 2)
-		argv = ft_split(argv[1], ' ');
-		
-		
-		
+	argv = ft_split(argv[1], ' ');	
 	stack_init(&a, argv);
-	init_stack_utils(&a, &b);
-	sort(&a, &b);
+	if (!is_sorted(a))
+	{
+		if (size_stack(a) == 2)
+			swap_a(&a);
+		else if (size_stack(a) == 3)
+			tiny_sort(&a);
+		else
+			sort(&a, &b);
+	}
 }

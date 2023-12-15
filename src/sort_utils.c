@@ -39,13 +39,11 @@ void	set_target_node(t_stack_node *a, t_stack_node *b)
 {
 	t_stack_node	*current_a;
 	t_stack_node	*target_node;
-	int				best_target;
+	long				best_target;
 	
-	if (!a || !b)
-		return ;
 	while (b)
 	{
-		best_target = 2147483647;
+		best_target = 2147483648;
 		current_a = a;
 		while (current_a)
 		{
@@ -56,7 +54,7 @@ void	set_target_node(t_stack_node *a, t_stack_node *b)
 			}
 			current_a = current_a->next;
 		}
-		if (best_target == 2147483647)
+		if (best_target == 2147483648)
 			b->target = find_smallest(a);
 		else
 			b->target = target_node;
@@ -74,11 +72,11 @@ void	set_price_node(t_stack_node *a, t_stack_node *b)
 	while (b)
 	{
 		b->push_price = b->current_pos;
-		if (b->above_median)
+		if (!(b->above_median))
 			b->push_price = len_stack_b - (b->current_pos);
-		if (!(b->target->above_median))
+		if (b->target->above_median)
 			b->push_price += b->target->current_pos;
-		else if (b->target->above_median)
+		else if (!(b->target->above_median))
 			b->push_price += len_stack_a - (b->target->current_pos);
 		b = b->next;
 	}
@@ -88,11 +86,11 @@ void	set_cheapest_node(t_stack_node **stack)
 {
 	t_stack_node	*head;
 	t_stack_node	*cheapest_node;
-	int				cheapest;
+	long				cheapest;
 	
 	if (!stack || !*stack)
 		return ;
-	cheapest = 2147483647;
+	cheapest = 2147483648;
 	head = *stack;
 	while (head)
 	{

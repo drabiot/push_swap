@@ -67,3 +67,13 @@ void	tiny_sort(t_stack_node **stack)
 	}
 	sort_tiny_stack(stack, final_pos);
 }
+
+void	little_sort(t_stack_node **a, t_stack_node **b)
+{
+	while (size_stack(*a) > 3)
+	{
+		init_stack_utils(a, b);
+		finish_rotation(a, find_smallest(*a), 'a');
+		push_b(b, a);
+	}
+}

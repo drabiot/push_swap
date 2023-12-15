@@ -148,5 +148,7 @@ void	set_position_node(t_stack_node **stack);
 void	set_target_node(t_stack_node *a, t_stack_node *b);
 void	set_price_node(t_stack_node *a, t_stack_node *b);
 void	set_cheapest_node(t_stack_node **stack);
+void finish_rotation(t_stack_node **stack, t_stack_node *cheap, char name);
+void	little_sort(t_stack_node **a, t_stack_node **b);
 
 #endif //PUSH_SWAP_H

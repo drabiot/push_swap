@@ -20,8 +20,8 @@ CC		=			clang
 
 #=========== FLAGS ============#
 
-CFLAGS		=		-Wall -Wextra -Werror	#Usual flags
-GFLAGS		=		$(CFLAGS) -g			#Flag for gdb or valgrind
+GFLAGS		=		-Wall -Wextra -Werror	#Usual flags
+CFLAGS		=		$(GFLAGS) -g			#Flag for gdb or valgrind
 
 #=========== COLOR ============#
 

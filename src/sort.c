@@ -44,7 +44,7 @@ static void r_r_both(t_stack_node **a, t_stack_node **b, t_stack_node *cheap)
 	set_position_node(b);
 }
 
-static void finish_rotation(t_stack_node **stack, t_stack_node *cheap, char name)
+void finish_rotation(t_stack_node **stack, t_stack_node *cheap, char name)
 {
 	while (*stack != cheap)
 	{
@@ -73,7 +73,7 @@ static void	set_rotate_node(t_stack_node **a, t_stack_node **b)
 	if (cheapest_node->above_median && cheapest_node->target->above_median)
 		rotate_both(a, b, cheapest_node);
 	else if (!(cheapest_node->above_median)
-		&& (!cheapest_node->target->above_median))
+		&& !(cheapest_node->target->above_median))
 		r_r_both(a, b, cheapest_node);
 	finish_rotation(b, cheapest_node, 'b');
 	finish_rotation(a, cheapest_node->target, 'a');
@@ -86,12 +86,15 @@ void	sort(t_stack_node **a, t_stack_node **b)
 	t_stack_node	*smallest;
 
 	len_stack = size_stack(*a);
-	if (is_sorted(*a))
-		return ;
-	while (len_stack > 3)
+	if (len_stack == 5)
+		little_sort(a, b);
+	else
 	{
-		push_b(b, a);
-		len_stack--;
+		while (len_stack > 3)
+		{
+			push_b(b, a);
+			len_stack--;
+		}
 	}
 	while (*b)
 	{

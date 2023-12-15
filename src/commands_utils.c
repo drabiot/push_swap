@@ -15,11 +15,11 @@
 t_stack_node	*find_smallest(t_stack_node *stack)
 {
 	t_stack_node	*smallest_node;
-	int		smallest;
+	long		smallest;
 	
 	if (!stack)
 		return (NULL);
-	smallest = 2147483647;
+	smallest = 2147483648;
 	while (stack)
 	{
 		if (stack->value < smallest)

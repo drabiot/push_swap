@@ -15,7 +15,7 @@
 static t_stack_node	*return_cheapest(t_stack_node **stack)
 {
 	t_stack_node	*head;
-	
+
 	if (!stack || !*stack)
 		return (NULL);
 	head = *stack;
@@ -28,36 +28,42 @@ static t_stack_node	*return_cheapest(t_stack_node **stack)
 	return (NULL);
 }
 
-static void rotate_both(t_stack_node **a, t_stack_node **b, t_stack_node *cheap)
+static void	rotate_both(t_stack_node **a,
+			t_stack_node **b,
+			t_stack_node *cheapest)
 {
-	while (*a != cheap->target && *b != cheap)
+	while (*a != cheapest->target && *b != cheapest)
 		rotate_all(a, b);
 	set_position_node(a);
 	set_position_node(b);
 }
 
-static void r_r_both(t_stack_node **a, t_stack_node **b, t_stack_node *cheap)
+static void	reverse_rotate_both(t_stack_node **a,
+			t_stack_node **b,
+			t_stack_node *cheapest)
 {
-	while (*a != cheap->target && *b != cheap)
+	while (*a != cheapest->target && *b != cheapest)
 		reverse_rotate_all(a, b);
 	set_position_node(a);
 	set_position_node(b);
 }
 
-void finish_rotation(t_stack_node **stack, t_stack_node *cheap, char name)
+void	finish_rotation(t_stack_node **stack,
+		t_stack_node *cheapest,
+		char stack_name)
 {
-	while (*stack != cheap)
+	while (*stack != cheapest)
 	{
-		if (name == 'a')
+		if (stack_name == 'a')
 		{
-			if (cheap->above_median)
+			if (cheapest->above_median)
 				rotate_a(stack);
 			else
 				reverse_rotate_a(stack);
 		}
-		else if (name == 'b')
+		else if (stack_name == 'b')
 		{
-			if (cheap->above_median)
+			if (cheapest->above_median)
 				rotate_b(stack);
 			else
 				reverse_rotate_b(stack);
@@ -68,13 +74,13 @@ void finish_rotation(t_stack_node **stack, t_stack_node *cheap, char name)
 static void	set_rotate_node(t_stack_node **a, t_stack_node **b)
 {
 	t_stack_node	*cheapest_node;
-	
+
 	cheapest_node = return_cheapest(b);
 	if (cheapest_node->above_median && cheapest_node->target->above_median)
 		rotate_both(a, b, cheapest_node);
 	else if (!(cheapest_node->above_median)
 		&& !(cheapest_node->target->above_median))
-		r_r_both(a, b, cheapest_node);
+		reverse_rotate_both(a, b, cheapest_node);
 	finish_rotation(b, cheapest_node, 'b');
 	finish_rotation(a, cheapest_node->target, 'a');
 	push_a(a, b);
@@ -86,6 +92,8 @@ void	sort(t_stack_node **a, t_stack_node **b)
 	t_stack_node	*smallest;
 
 	len_stack = size_stack(*a);
+	if (is_sorted(*a))
+		return ;
 	if (len_stack == 5)
 		little_sort(a, b);
 	else
@@ -96,13 +104,14 @@ void	sort(t_stack_node **a, t_stack_node **b)
 			len_stack--;
 		}
 	}
+	tiny_sort(a);
 	while (*b)
 	{
 		init_stack_utils(a, b);
 		set_rotate_node(a, b);
 	}
 	set_position_node(a);
-	smallest = find_smallest(*a);
+	smallest = find_smallest(a);
 	if (smallest->above_median)
 	{
 		while ((*a)->value != smallest->value)

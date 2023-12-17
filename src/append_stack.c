@@ -6,7 +6,7 @@
 /*   By: tchartie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 17:04:04 by tchartie          #+#    #+#             */
-/*   Updated: 2023/12/07 17:48:05 by tchartie         ###   ########.fr       */
+/*   Updated: 2023/12/17 22:45:37 by tchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,12 @@ static void	append_node(t_stack_node **stack, int nb)
 	if (!current)
 		return ;
 	current->next = NULL;
+	current->target = NULL;
 	current->value = nb;
+	current->cheapest = 0;
+	current->push_price = 0;
+	current->current_pos = 0;
+	current->above_median = 0;
 	if (!*stack)
 		*stack = current;
 	else

@@ -28,7 +28,7 @@ static void	reverse_rotate(t_stack_node **stack)
 	head = *stack;
 	end = *stack;
 	while (end->next->next)
-			end = end->next;
+		end = end->next;
 	last = last_node(*stack);
 	add_front(stack, last);
 	end->next = NULL;

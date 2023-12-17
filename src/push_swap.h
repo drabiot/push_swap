@@ -29,7 +29,7 @@ typedef struct s_stack_node
 
 /* ********************************************************** */
 /*                                                            */
-/*                       Append_stack.c                       */
+/*                        Append_stack                        */
 /*                                                            */
 /* ********************************************************** */
 
@@ -38,11 +38,52 @@ typedef struct s_stack_node
 /*    Initialize the given stack with the     */
 /*              given arguments               */
 /* ****************************************** */
-void					stack_init(t_stack_node **a, char **argv);
+void			stack_init(t_stack_node **a, char **argv);
+
+/* ****************************************** */
+/*             Init_stack_utils()             */
+/*      Initialize all the nodes in the       */
+/*                given stack                 */
+/* ****************************************** */
+void			init_stack_utils(t_stack_node **a, t_stack_node **b);
+
+/* ****************************************** */
+/*            set_position_node()             */
+/*     Take a stack and assign each node      */
+/*                its position                */
+/* ****************************************** */
+void			set_position_node(t_stack_node **stack);
+
+/* ****************************************** */
+/*            set_position_node()             */
+/*     Take a stack and assign each node      */
+/*              its target node.              */
+/*    The nodes in the stack should point     */
+/*       to the smallest number greater       */
+/*        than themselves in stack b.         */
+/*       If there is no greater number,       */
+/*         point to the smallest one          */
+/* ****************************************** */
+void			set_target_node(t_stack_node **a, t_stack_node *b);
+
+/* ****************************************** */
+/*              set_price_node()              */
+/*        Take a stack and assign each        */
+/*    node its push cost (in instructions)    */
+/* ****************************************** */
+void			set_price_node(t_stack_node **a, t_stack_node *b);
+
+/* ****************************************** */
+/*            set_cheapest_node()             */
+/*      Take a stack and check if it is       */
+/*        the most economical to push         */
+/*           by examining its cost            */
+/* ****************************************** */
+void			set_cheapest_node(t_stack_node **stack);
 
 /* ********************************************************** */
 /*                                                            */
-/*                       Error_Check.c                        */
+/*                        Error_Check                         */
 /*                                                            */
 /* ********************************************************** */
 
@@ -50,21 +91,21 @@ void					stack_init(t_stack_node **a, char **argv);
 /*               error_syntax()               */
 /* Check if given arguments are well-written  */
 /* ****************************************** */
-int						error_syntax(char *arg);
+int				error_syntax(char *arg);
 
 /* ****************************************** */
 /*             error_repetition()             */
 /*      Check if there are not two times      */
 /*              the same number               */
 /* ****************************************** */
-int						error_repetition(t_stack_node *a, int nb);
+int				error_repetition(t_stack_node *a, int nb);
 
 /* ****************************************** */
 /*                  error()                   */
 /*         Return errors and free the         */
 /*     memory of the stack and the matrix     */
 /* ****************************************** */
-void					error(t_stack_node **stack, char **argv);
+void			error(t_stack_node **stack, char **argv);
 
 /* ********************************************************** */
 /*                                                            */
@@ -72,44 +113,50 @@ void					error(t_stack_node **stack, char **argv);
 /*                                                            */
 /* ********************************************************** */
 
-t_stack_node			*find_smallest(t_stack_node *stack);
+/* ****************************************** */
+/*            find_small/biggest()            */
+/*      Take a stack and return the node      */
+/*      with the smallest/largest value       */
+/* ****************************************** */
+t_stack_node	*find_biggest(t_stack_node **stack);
+t_stack_node	*find_smallest(t_stack_node **stack);
 
 /* ****************************************** */
 /*                size_stack()                */
 /*           Count the total number           */
 /*            of nodes in a stack             */
 /* ****************************************** */
-int						size_stack(t_stack_node *stack);
+int				size_stack(t_stack_node *stack);
 
 /* ****************************************** */
 /*                last_node()                 */
 /*          Return the last node of           */
 /*              the given stack               */
 /* ****************************************** */
-t_stack_node			*last_node(t_stack_node *stack);
+t_stack_node	*last_node(t_stack_node *stack);
 
 /* ****************************************** */
 /*                add_front()                 */
 /*     Add a new node in the front (tail)     */
 /*              of a given stack              */
 /* ****************************************** */
-void					add_front(t_stack_node **stack, t_stack_node *new);
+void			add_front(t_stack_node **stack, t_stack_node *new);
 
 /* ****************************************** */
 /*                add_fback()                 */
 /*     Add a new node in the back (head)      */
 /*              of a given stack              */
 /* ****************************************** */
-void					add_back(t_stack_node **stack, t_stack_node *new);
+void			add_back(t_stack_node **stack, t_stack_node *new);
 
 /* ****************************************** */
 /*                   swap()                   */
 /*        Swap the first two elements         */
 /*                of the stack                */
 /* ****************************************** */
-void					swap_a(t_stack_node **a);
-void					swap_b(t_stack_node **b);
-void					swap_all(t_stack_node **a, t_stack_node **b);
+void			swap_a(t_stack_node **a);
+void			swap_b(t_stack_node **b);
+void			swap_all(t_stack_node **a, t_stack_node **b);
 
 /* ****************************************** */
 /*                   push()                   */
@@ -117,38 +164,66 @@ void					swap_all(t_stack_node **a, t_stack_node **b);
 /*       of a stack & put it at the top       */
 /*             of an other stack              */
 /* ****************************************** */
-void					push_a(t_stack_node **a, t_stack_node **b);
-void					push_b(t_stack_node **b, t_stack_node **a);
+void			push_a(t_stack_node **a, t_stack_node **b);
+void			push_b(t_stack_node **b, t_stack_node **a);
 
 /* ****************************************** */
 /*                  rotate()                  */
 /*          Shift up all elements of          */
 /*               the stack by 1               */
 /* ****************************************** */
-void					rotate_a(t_stack_node **a);
-void					rotate_b(t_stack_node **b);
-void					rotate_all(t_stack_node **a, t_stack_node **b);
+void			rotate_a(t_stack_node **a);
+void			rotate_b(t_stack_node **b);
+void			rotate_all(t_stack_node **a, t_stack_node **b);
 
 /* ****************************************** */
 /*              reverse_rotate()              */
 /*         Shift down all elements of         */
 /*              the stack by 1.               */
 /* ****************************************** */
-void					reverse_rotate_a(t_stack_node **a);
-void					reverse_rotate_b(t_stack_node **b);
-void					reverse_rotate_all(t_stack_node **a, t_stack_node **b);
+void			reverse_rotate_a(t_stack_node **a);
+void			reverse_rotate_b(t_stack_node **b);
+void			reverse_rotate_all(t_stack_node **a, t_stack_node **b);
 
-int						is_sorted(t_stack_node *stack);
-void					tiny_sort(t_stack_node **stack);
+/* ********************************************************** */
+/*                                                            */
+/*                     Sorting Algorithm                      */
+/*                                                            */
+/* ********************************************************** */
 
-void    sort(t_stack_node **a, t_stack_node **b);
-void	init_stack_utils(t_stack_node **a, t_stack_node **b);
+/* ****************************************** */
+/*                is_sorted()                 */
+/*   Take a stack and check if it is sorted   */
+/* ****************************************** */
+int				is_sorted(t_stack_node *stack);
 
-void	set_position_node(t_stack_node **stack);
-void	set_target_node(t_stack_node *a, t_stack_node *b);
-void	set_price_node(t_stack_node *a, t_stack_node *b);
-void	set_cheapest_node(t_stack_node **stack);
-void finish_rotation(t_stack_node **stack, t_stack_node *cheap, char name);
-void	little_sort(t_stack_node **a, t_stack_node **b);
+/* ****************************************** */
+/*                tiny_sort()                 */
+/*     Take a stack of 3 elements at most     */
+/*            & sort it optimally             */
+/* ****************************************** */
+void			tiny_sort(t_stack_node **stack);
+
+/* ****************************************** */
+/*               little_sort()                */
+/*     Take a stack of 5 elements & sort      */
+/*       it optimally with tiny_sort()        */
+/* ****************************************** */
+void			little_sort(t_stack_node **a, t_stack_node **b);
+
+/* ****************************************** */
+/*                   sort()                   */
+/*      Take a stack & sort it optimally      */
+/* ****************************************** */
+void			sort(t_stack_node **a, t_stack_node **b);
+
+/* ****************************************** */
+/*             finish_rotation()              */
+/*  Take a stack and set the smallest value   */
+/*          on the top of the stack           */
+/* ****************************************** */
+void			finish_rotation(t_stack_node **stack,
+					t_stack_node *cheapest,
+					char stack_name);
 
 #endif //PUSH_SWAP_H

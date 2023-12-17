@@ -20,7 +20,7 @@ static void	rotate(t_stack_node **stack)
 	int				len_stack;
 	t_stack_node	*head;
 	t_stack_node	*end;
-	
+
 	len_stack = size_stack(*stack);
 	if (!stack || !*stack || len_stack == 1)
 		return ;

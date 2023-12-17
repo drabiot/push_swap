@@ -35,24 +35,25 @@ void	set_position_node(t_stack_node **stack)
 	}
 }
 
-void	set_target_node(t_stack_node *a, t_stack_node *b)
+void	set_target_node(t_stack_node **a, t_stack_node *b)
 {
-	t_stack_node	*current_a;
+	t_stack_node	*head_a;
 	t_stack_node	*target_node;
-	long				best_target;
-	
+	long			best_target;
+
 	while (b)
 	{
 		best_target = 2147483648;
-		current_a = a;
-		while (current_a)
+		head_a = *a;
+		while (head_a)
 		{
-			if (current_a->value > b->value && current_a->value < best_target)
+			if (head_a->value > b->value &&
+				head_a->value < best_target)
 			{
-				best_target = current_a->value;
-				target_node = current_a;
+				best_target = head_a->value;
+				target_node = head_a;
 			}
-			current_a = current_a->next;
+			head_a = head_a->next;
 		}
 		if (best_target == 2147483648)
 			b->target = find_smallest(a);
@@ -62,12 +63,12 @@ void	set_target_node(t_stack_node *a, t_stack_node *b)
 	}
 }
 
-void	set_price_node(t_stack_node *a, t_stack_node *b)
+void	set_price_node(t_stack_node **a, t_stack_node *b)
 {
 	int	len_stack_a;
 	int	len_stack_b;
-	
-	len_stack_a = size_stack(a);
+
+	len_stack_a = size_stack(*a);
 	len_stack_b = size_stack(b);
 	while (b)
 	{
@@ -86,8 +87,8 @@ void	set_cheapest_node(t_stack_node **stack)
 {
 	t_stack_node	*head;
 	t_stack_node	*cheapest_node;
-	long				cheapest;
-	
+	long			cheapest;
+
 	if (!stack || !*stack)
 		return ;
 	cheapest = 2147483648;
@@ -108,8 +109,7 @@ void	init_stack_utils(t_stack_node **a, t_stack_node **b)
 {
 	set_position_node(a);
 	set_position_node(b);
-	set_target_node(*a, *b);
-	set_price_node(*a, *b);
+	set_target_node(a, *b);
+	set_price_node(a, *b);
 	set_cheapest_node(b);
-	
 }

@@ -26,8 +26,8 @@ static void	push(t_stack_node **dst, t_stack_node **src)
 	*src = (*src)->next;
 	node_to_push->next = *dst;
 	*dst = node_to_push;
-	
 }
+
 /*
 ** Take the first element of the stack a & put it on top
 ** of stack b
@@ -47,4 +47,3 @@ void	push_b(t_stack_node **b, t_stack_node **a)
 	push(b, a);
 	write (1, "pb\n", 3);
 }
-

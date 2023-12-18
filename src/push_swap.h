@@ -38,7 +38,7 @@ typedef struct s_stack_node
 /*    Initialize the given stack with the     */
 /*              given arguments               */
 /* ****************************************** */
-void			stack_init(t_stack_node **a, char **argv);
+void			stack_init(t_stack_node **a, char **matrix, char *array);
 
 /* ****************************************** */
 /*             Init_stack_utils()             */
@@ -105,7 +105,19 @@ int				error_repetition(t_stack_node *a, int nb);
 /*         Return errors and free the         */
 /*     memory of the stack and the matrix     */
 /* ****************************************** */
-void			error(t_stack_node **stack, char **argv);
+void			error(t_stack_node **stack, char **matrix, char *array);
+
+/* ****************************************** */
+/*               free_matrix()                */
+/*           Free the given matrix            */
+/* ****************************************** */
+void			free_matrix(char **matrix);
+
+/* ****************************************** */
+/*                free_stack()                */
+/*            Free the given stack            */
+/* ****************************************** */
+void			free_stack(t_stack_node **stack);
 
 /* ********************************************************** */
 /*                                                            */
@@ -134,6 +146,13 @@ int				size_stack(t_stack_node *stack);
 /*              the given stack               */
 /* ****************************************** */
 t_stack_node	*last_node(t_stack_node *stack);
+
+/* ****************************************** */
+/*             return_cheapest()              */
+/*        Return the cheapest node in         */
+/*              the given stack               */
+/* ****************************************** */
+t_stack_node	*return_cheapest(t_stack_node **stack);
 
 /* ****************************************** */
 /*                add_front()                 */
@@ -219,11 +238,36 @@ void			sort(t_stack_node **a, t_stack_node **b);
 
 /* ****************************************** */
 /*             finish_rotation()              */
-/*  Take a stack and set the smallest value   */
+/*   Take a stack and set the cheapest node   */
 /*          on the top of the stack           */
 /* ****************************************** */
 void			finish_rotation(t_stack_node **stack,
 					t_stack_node *cheapest,
 					char stack_name);
+
+/* ****************************************** */
+/*               rotate_both()                */
+/*         Rotate the two given stack         */
+/* ****************************************** */
+void			rotate_both(t_stack_node **a,
+					t_stack_node **b,
+					t_stack_node *cheapest);
+
+/* ****************************************** */
+/*           reverse_rotate_both()            */
+/*     Reverse rotate the two given stack     */
+/* ****************************************** */
+void			reverse_rotate_both(t_stack_node **a,
+					t_stack_node **b,
+					t_stack_node *cheapest);
+
+/* ****************************************** */
+/*             set_rotate_node()              */
+/*        Rotate or reverse rotate the        */
+/*           two given stacks with            */
+/*    rotate_both(), reverse_rotate_both()    */
+/*            & finish_rotation()             */
+/* ****************************************** */
+void			set_rotate_node(t_stack_node **a, t_stack_node **b);
 
 #endif //PUSH_SWAP_H

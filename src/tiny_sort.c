@@ -13,6 +13,9 @@
 #include "push_swap.h"
 #include <stdio.h>
 
+/*
+** Return the smallest node's value in the given stack
+*/
 t_stack_node	*find_smallest(t_stack_node **stack)
 {
 	t_stack_node	*smallest_node;
@@ -35,6 +38,9 @@ t_stack_node	*find_smallest(t_stack_node **stack)
 	return (smallest_node);
 }
 
+/*
+** Return the biggest node's value in the given stack
+*/
 t_stack_node	*find_biggest(t_stack_node **stack)
 {
 	t_stack_node	*biggest_node;
@@ -57,6 +63,9 @@ t_stack_node	*find_biggest(t_stack_node **stack)
 	return (biggest_node);
 }
 
+/*
+** Check if the stack is correctly sorted
+*/
 int	is_sorted(t_stack_node *stack)
 {
 	int				data;
@@ -76,6 +85,9 @@ int	is_sorted(t_stack_node *stack)
 	return (1);
 }
 
+/*
+** Sort a stack of 3 maximum elements
+*/
 void	tiny_sort(t_stack_node **stack)
 {
 	t_stack_node	*biggest_node;
@@ -87,15 +99,23 @@ void	tiny_sort(t_stack_node **stack)
 	biggest_node = find_biggest(stack);
 	if (!is_sorted(*stack))
 	{
-		if ((*stack)->value == biggest_node->value)
-			rotate_a(stack);
-		else if ((*stack)->next->value == biggest_node->value)
-			reverse_rotate_a(stack);
-		if (!is_sorted(*stack))
+		if (len_stack == 2)
 			swap_a(stack);
+		else if (len_stack == 3)
+		{
+			if ((*stack)->value == biggest_node->value)
+				rotate_a(stack);
+			else if ((*stack)->next->value == biggest_node->value)
+				reverse_rotate_a(stack);
+			if (!is_sorted(*stack))
+				swap_a(stack);
+		}
 	}
 }
 
+/*
+** Sort a stack of 4 or 5 elements
+*/
 void	little_sort(t_stack_node **a, t_stack_node **b)
 {
 	while (size_stack(*a) > 3)

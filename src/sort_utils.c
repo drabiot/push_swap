@@ -1,17 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort.c                                             :+:      :+:    :+:   */
+/*   sort_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tchartie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/13 17:10:29 by tchartie          #+#    #+#             */
-/*   Updated: 2023/12/13 17:17:18 by tchartie         ###   ########.fr       */
+/*   Created: 2023/12/18 00:00:03 by tchartie          #+#    #+#             */
+/*   Updated: 2023/12/18 00:00:05 by tchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+/*
+** Take a stack and assign each node its position
+*/
 void	set_position_node(t_stack_node **stack)
 {
 	t_stack_node	*head;
@@ -35,6 +38,12 @@ void	set_position_node(t_stack_node **stack)
 	}
 }
 
+/*
+** Take a stack and assign each node its target node.
+** The nodes in the stack should point to the smallest
+** number greater than themselves in the stack b.
+** If there is no greater number, point to the smallest one
+*/
 void	set_target_node(t_stack_node **a, t_stack_node *b)
 {
 	t_stack_node	*head_a;
@@ -47,8 +56,8 @@ void	set_target_node(t_stack_node **a, t_stack_node *b)
 		head_a = *a;
 		while (head_a)
 		{
-			if (head_a->value > b->value &&
-				head_a->value < best_target)
+			if (head_a->value > b->value
+				&& head_a->value < best_target)
 			{
 				best_target = head_a->value;
 				target_node = head_a;
@@ -63,6 +72,9 @@ void	set_target_node(t_stack_node **a, t_stack_node *b)
 	}
 }
 
+/*
+** Take a stack and assign each node its push cost (in instruction)
+*/
 void	set_price_node(t_stack_node **a, t_stack_node *b)
 {
 	int	len_stack_a;
@@ -83,6 +95,10 @@ void	set_price_node(t_stack_node **a, t_stack_node *b)
 	}
 }
 
+/*
+** Take a stack and check if it is the most economical
+** to push by examining its cost
+*/
 void	set_cheapest_node(t_stack_node **stack)
 {
 	t_stack_node	*head;
@@ -105,6 +121,9 @@ void	set_cheapest_node(t_stack_node **stack)
 	cheapest_node->cheapest = 1;
 }
 
+/*
+** Initialize all the nodes in the given stack
+*/
 void	init_stack_utils(t_stack_node **a, t_stack_node **b)
 {
 	set_position_node(a);

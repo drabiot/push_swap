@@ -71,3 +71,29 @@ void	add_back(t_stack_node **stack, t_stack_node *new)
 		buffer->next = new;
 	}
 }
+
+/*
+** Take a stack and set the cheapest node on the top of the stack
+*/
+void	finish_rotation(t_stack_node **stack,
+		t_stack_node *cheapest,
+		char stack_name)
+{
+	while (*stack != cheapest)
+	{
+		if (stack_name == 'a')
+		{
+			if (cheapest->above_median)
+				rotate_a(stack);
+			else
+				reverse_rotate_a(stack);
+		}
+		else if (stack_name == 'b')
+		{
+			if (cheapest->above_median)
+				rotate_b(stack);
+			else
+				reverse_rotate_b(stack);
+		}
+	}
+}

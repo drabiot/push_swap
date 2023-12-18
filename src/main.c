@@ -15,47 +15,55 @@
 
 #include <stdio.h>
 
-static char *create_array(int argc, char **argv)
+/*
+** Create an array with the given matrix
+*/
+static char	*create_array(int argc, char **argv)
 {
 	char	*array;
 	int		i;
-	
+
 	array = NULL;
 	i = 1;
 	if (argc > 2)
 	{
 		while (i < argc)
 		{
-			array = ft_strjoin(array, argv[i]);
-			array = ft_strjoin(array, " ");
+			array = ft_strjoin(array, ft_strdup(argv[i]));
+			array = ft_strjoin(array, ft_strdup(" "));
 			i++;
 		}
-		return (array);	
+		return (array);
 	}
-	return(argv[1]);
+	return (ft_strdup(argv[1]));
 }
 
+/*
+** main
+*/
 int	main(int argc, char **argv)
 {
 	t_stack_node	*a;
 	t_stack_node	*b;
+	int				len_stack_a;
 	char			*array;
+	char			**matrix;
 
 	a = NULL;
 	b = NULL;
-	array = NULL;
 	if (argc == 1 || (argc == 2 && !argv[1][0]))
 		return (1);
-	argv[1] = create_array(argc, argv);
-	argv = ft_split(argv[1], ' ');	
-	stack_init(&a, argv);
+	array = create_array(argc, argv);
+	matrix = ft_split(array, ' ');
+	stack_init(&a, matrix, array);
+	len_stack_a = size_stack(a);
 	if (!is_sorted(a))
 	{
-		if (size_stack(a) == 2)
-			swap_a(&a);
-		else if (size_stack(a) == 3)
-			tiny_sort(&a);
-		else
-			sort(&a, &b);
+		if (len_stack_a >= 4 && len_stack_a <= 5)
+			little_sort(&a, &b);
+		sort(&a, &b);
 	}
+	free_stack(&a);
+	free(array);
+	free_matrix(matrix);
 }

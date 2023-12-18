@@ -20,8 +20,8 @@ CC		=			clang
 
 #=========== FLAGS ============#
 
-GFLAGS		=		-Wall -Wextra -Werror	#Usual flags
-CFLAGS		=		$(GFLAGS) -g			#Flag for gdb or valgrind
+CFLAGS		=		-Wall -Wextra -Werror	#Usual flags
+GFLAGS		=		$(CFLAGS) -g			#Flag for gdb or valgrind
 
 #=========== COLOR ============#
 
@@ -77,7 +77,7 @@ $(NAME) : 			$(OBJS_F) | makelibft
 $(OBJS_DIR)%.o :	$(SRCS_DIR)%.c $(INCLUDE)
 					@mkdir -p $(OBJS_DIR)
 					@echo "$(YELLOW)Compiling: $< $(BASE_COLOR)"
-					@$(CC) $(CFLAGS) -c $< -o $@
+					@$(CC) $(GFLAGS) -c $< -o $@
 
 clean :
 					@rm -rf $(OBJS_DIR)

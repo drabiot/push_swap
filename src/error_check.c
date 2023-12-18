@@ -15,7 +15,7 @@
 /*
 ** Free the given stack
 */
-static void	free_stack(t_stack_node **stack)
+void	free_stack(t_stack_node **stack)
 {
 	t_stack_node	*tmp;
 	t_stack_node	*current;
@@ -35,28 +35,29 @@ static void	free_stack(t_stack_node **stack)
 /*
 ** Free the given matrix & its arrays
 */
-static void	free_matrix(char **argv)
+void	free_matrix(char **matrix)
 {
 	int	i;
 
 	i = 0;
-	if (!argv || !*argv)
+	if (!matrix || !*matrix)
 		return ;
-	while (argv[i])
+	while (matrix[i])
 	{
-		free(argv[i]);
+		free(matrix[i]);
 		i++;
 	}
-	free(argv);
+	free(matrix);
 }
 
 /*
 ** Return errors & free the memory of the stack and the matrix given
 */
-void	error(t_stack_node **stack, char **argv)
+void	error(t_stack_node **stack, char **matrix, char *array)
 {
 	free_stack(stack);
-	free_matrix(argv);
+	free(array);
+	free_matrix(matrix);
 	write(2, "Error\n", 6);
 	exit(1);
 }

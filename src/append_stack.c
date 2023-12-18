@@ -46,23 +46,42 @@ static void	append_node(t_stack_node **stack, int nb)
 ** Check the given arguments & Initialize the 
 ** given stack with the given arguments
 */
-void	stack_init(t_stack_node **a, char **argv)
+void	stack_init(t_stack_node **a, char **matrix, char *array)
 {
 	long	nbr;
 	int		i;
 
 	nbr = 0;
 	i = 0;
-	while (argv[i])
+	while (matrix[i])
 	{
-		if (error_syntax(argv[i]))
-			error(a, argv);
-		nbr = ft_atol(argv[i]);
+		if (error_syntax(matrix[i]))
+			error(a, matrix, array);
+		nbr = ft_atol(matrix[i]);
 		if (nbr > 2147483647 || nbr < -2147483648)
-			error(a, argv);
+			error(a, matrix, array);
 		if (error_repetition(*a, (int)nbr))
-			error(a, argv);
+			error(a, matrix, array);
 		append_node(a, (int)nbr);
 		i++;
 	}
+}
+
+/*
+** Return the cheapest node of the given stack
+*/
+t_stack_node	*return_cheapest(t_stack_node **stack)
+{
+	t_stack_node	*head;
+
+	if (!stack || !*stack)
+		return (NULL);
+	head = *stack;
+	while (head)
+	{
+		if (head->cheapest)
+			return (head);
+		head = head->next;
+	}
+	return (NULL);
 }

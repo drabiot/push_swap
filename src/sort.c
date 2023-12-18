@@ -12,23 +12,11 @@
 
 #include "push_swap.h"
 
-static t_stack_node	*return_cheapest(t_stack_node **stack)
-{
-	t_stack_node	*head;
-
-	if (!stack || !*stack)
-		return (NULL);
-	head = *stack;
-	while (head)
-	{
-		if (head->cheapest)
-			return (head);
-		head = head->next;
-	}
-	return (NULL);
-}
-
-static void	rotate_both(t_stack_node **a,
+/*
+** Rotate the two given stack until one of the cheapest node
+** is on top of the stack 
+*/
+void	rotate_both(t_stack_node **a,
 			t_stack_node **b,
 			t_stack_node *cheapest)
 {
@@ -38,7 +26,11 @@ static void	rotate_both(t_stack_node **a,
 	set_position_node(b);
 }
 
-static void	reverse_rotate_both(t_stack_node **a,
+/*
+** Reverse rotate the two given stack until one of the cheapest
+** node is on top of the stack 
+*/
+void	reverse_rotate_both(t_stack_node **a,
 			t_stack_node **b,
 			t_stack_node *cheapest)
 {
@@ -48,30 +40,11 @@ static void	reverse_rotate_both(t_stack_node **a,
 	set_position_node(b);
 }
 
-void	finish_rotation(t_stack_node **stack,
-		t_stack_node *cheapest,
-		char stack_name)
-{
-	while (*stack != cheapest)
-	{
-		if (stack_name == 'a')
-		{
-			if (cheapest->above_median)
-				rotate_a(stack);
-			else
-				reverse_rotate_a(stack);
-		}
-		else if (stack_name == 'b')
-		{
-			if (cheapest->above_median)
-				rotate_b(stack);
-			else
-				reverse_rotate_b(stack);
-		}
-	}
-}
-
-static void	set_rotate_node(t_stack_node **a, t_stack_node **b)
+/*
+** Rotate or reverse rotate the two given stack until the cheapest node
+** or its target are on the top of the stack
+*/
+void	set_rotate_node(t_stack_node **a, t_stack_node **b)
 {
 	t_stack_node	*cheapest_node;
 
@@ -86,32 +59,11 @@ static void	set_rotate_node(t_stack_node **a, t_stack_node **b)
 	push_a(a, b);
 }
 
-void	sort(t_stack_node **a, t_stack_node **b)
+/*
+** Set the smallest value on the top of the given stack
+*/
+static void	smallest_on_top(t_stack_node **a, t_stack_node *smallest)
 {
-	int				len_stack;
-	t_stack_node	*smallest;
-
-	len_stack = size_stack(*a);
-	if (is_sorted(*a))
-		return ;
-	if (len_stack == 5)
-		little_sort(a, b);
-	else
-	{
-		while (len_stack > 3)
-		{
-			push_b(b, a);
-			len_stack--;
-		}
-	}
-	tiny_sort(a);
-	while (*b)
-	{
-		init_stack_utils(a, b);
-		set_rotate_node(a, b);
-	}
-	set_position_node(a);
-	smallest = find_smallest(a);
 	if (smallest->above_median)
 	{
 		while ((*a)->value != smallest->value)
@@ -122,4 +74,29 @@ void	sort(t_stack_node **a, t_stack_node **b)
 		while ((*a)->value != smallest->value)
 			reverse_rotate_a(a);
 	}
+}
+
+/*
+** Sort the given stack a and put the smallest value on top
+*/
+void	sort(t_stack_node **a, t_stack_node **b)
+{
+	int				len_stack_a;
+	t_stack_node	*smallest;
+
+	len_stack_a = size_stack(*a);
+	while (len_stack_a > 3)
+	{
+		push_b(b, a);
+		len_stack_a--;
+	}
+	tiny_sort(a);
+	while (*b)
+	{
+		init_stack_utils(a, b);
+		set_rotate_node(a, b);
+	}
+	set_position_node(a);
+	smallest = find_smallest(a);
+	smallest_on_top(a, smallest);
 }

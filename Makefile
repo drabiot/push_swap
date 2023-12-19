@@ -13,6 +13,7 @@
 #============ NAME ============#
 
 NAME		=		push_swap
+ARCHIVE		=		push_swap.a
 NAME_BONUS	=		checker
 
 #========= COMPILATOR =========#
@@ -48,10 +49,22 @@ LIBFT_NAME	=		libft.a
 SRCS_DIR	=		src/
 SRCS_B_DIR	=		src_bonus/
 OBJS_DIR	=		obj/
+OBJS_A_DIR	=		obj_archive/
 OBJS_B_DIR	=		obj_bonus/
 
 SRCS		=		main.c \
 					append_stack.c \
+					error_check.c \
+					commands_utils.c \
+					swap_commands.c \
+					push_commands.c \
+					rotate_commands.c \
+					reverse_rotate_commands.c \
+					sort.c \
+					sort_utils.c \
+					tiny_sort.c
+					
+SRCS_ARCH	=		append_stack.c \
 					error_check.c \
 					commands_utils.c \
 					swap_commands.c \
@@ -67,17 +80,23 @@ SRCS_BONUS	=		main.c \
 					get_next_line_utils.c
 
 OBJS		=		$(SRCS:.c=.o)
+OBJS_ARCH	=		$(SRCS_ARCH:.c=.o)
 OBJS_BONUS	=		$(SRCS_BONUS:.c=.o)
 
 SRCS_F		=		$(addprefix $(SRCS_DIR),$(SRCS))
+SRCS_ARCH_F	=		$(addprefix $(SRCS_DIR),$(SRCS_ARCH))
 SRCS_B_F	=		$(addprefix $(SRCS_B_DIR),$(SRCS_BONUS))
+
 OBJS_F		=		$(addprefix $(OBJS_DIR),$(OBJS))
+OBJS_ARCH_F	=		$(addprefix $(OBJS_A_DIR),$(OBJS_ARCH))
 OBJS_B_F	=		$(addprefix $(OBJS_B_DIR),$(OBJS_BONUS))
 
 
 #========= EXECUTABLE =========#
 
 all :				$(NAME)
+
+bonus :				$(NAME_BONUS)
 
 makelibft :
 					@make -C $(LIBFT_DIR) all --no-print-directory
@@ -91,12 +110,22 @@ $(OBJS_DIR)%.o :	$(SRCS_DIR)%.c $(INCLUDE)
 					@echo "$(YELLOW)Compiling: $< $(BASE_COLOR)"
 					@$(CC) $(CFLAGS) -I$(INCLUDE_DIR) -c $< -o $@
 
-bonus :				$(OBJS_B_F) | all
-					@$(CC) $(OBJS_B_F) -o $(NAME_BONUS) -Llibft -lft -I$(INCLUDE_DIR)
-					@echo "$(GREEN)Checker successfully compiled! $(BASE_COLOR)"
-					
+$(ARCHIVE) :		$(OBJS_ARCH_F) | makelibft
+					@ar -rcs $(ARCHIVE) $(OBJS_ARCH_F)
+					@echo "$(GREEN)Push_swap.a successfully compiled! $(BASE_COLOR)"
 
-$(OBJS_B_DIR)%.o :	$(SRCS_B_DIR)%.c $(INCLUDE_B) $(INCLUDE)
+$(OBJS_A_DIR)%.o :	$(SRCS_DIR)%.c $(INCLUDE)
+					@mkdir -p $(OBJS_A_DIR)
+					@echo "$(YELLOW)Compiling: $< $(BASE_COLOR)"
+					@$(CC) $(CFLAGS) -I$(INCLUDE_DIR) -c $< -o $@
+
+$(NAME_BONUS) :		$(OBJS_B_F) $(ARCHIVE) | makelibft all
+					@$(CC) $(OBJS_B_F) $(ARCHIVE) -o $(NAME_BONUS) -Llibft -lft -I$(INCLUDE_DIR)
+					@echo "$(GREEN)Checker successfully compiled! $(BASE_COLOR)"
+					@rm -rf $(ARCHIVE)
+					@rm -rf $(OBJS_A_DIR)			
+
+$(OBJS_B_DIR)%.o :	$(SRCS_B_DIR)%.c $(INCLUDE) $(INCLUDE_B)
 					@mkdir -p $(OBJS_B_DIR)
 					@echo "$(YELLOW)Compiling $< $(BASE_COLOR)"
 					@$(CC) $(CFLAGS) -I$(INCLUDE_DIR) -c $< -o $@

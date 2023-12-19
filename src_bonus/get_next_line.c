@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "../include/checker.h"
 #include "../libft/src/libft.h"
 
 /*

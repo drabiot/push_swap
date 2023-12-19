@@ -13,8 +13,6 @@
 #include "../include/push_swap.h"
 #include "../libft/src/libft.h"
 
-#include <stdio.h>
-
 /*
 ** Create an array with the given matrix
 */

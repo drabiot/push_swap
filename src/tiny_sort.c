@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-#include <stdio.h>
+#include "../include/push_swap.h"
 
 /*
 ** Return the smallest node's value in the given stack

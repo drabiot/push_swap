@@ -5,15 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tchartie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/07 15:58:00 by tchartie          #+#    #+#             */
-/*   Updated: 2023/12/18 22:08:29 by tchartie         ###   ########.fr       */
+/*   Created: 2023/12/19 17:57:32 by tchartie          #+#    #+#             */
+/*   Updated: 2023/12/19 17:57:33 by tchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
+#include "checker.h"
+#include "../src/push_swap.h"
 #include "../libft/src/libft.h"
-
-#include <stdio.h>
 
 /*
 ** Create an array with the given matrix
@@ -45,7 +44,6 @@ int	main(int argc, char **argv)
 {
 	t_stack_node	*a;
 	t_stack_node	*b;
-	int				len_stack_a;
 	char			*array;
 	char			**matrix;
 
@@ -55,14 +53,6 @@ int	main(int argc, char **argv)
 		return (1);
 	array = create_array(argc, argv);
 	matrix = ft_split(array, ' ');
-	stack_init(&a, matrix, array);
-	len_stack_a = size_stack(a);
-	if (!is_sorted(a))
-	{
-		if (len_stack_a >= 4 && len_stack_a <= 5)
-			little_sort(&a, &b);
-		sort(&a, &b);
-	}
 	free_stack(&a);
 	free(array);
 	free_matrix(matrix);

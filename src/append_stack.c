@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../include/push_swap.h"
 #include "../libft/src/libft.h"
 
 /*
@@ -55,6 +55,8 @@ void	stack_init(t_stack_node **a, char **matrix, char *array)
 	i = 0;
 	while (matrix[i])
 	{
+		if (!matrix[i])
+			error(a, matrix, array);
 		if (error_syntax(matrix[i]))
 			error(a, matrix, array);
 		nbr = ft_atol(matrix[i]);

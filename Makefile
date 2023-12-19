@@ -6,13 +6,14 @@
 #    By: tchartie <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/04 09:42:17 by tchartie          #+#    #+#              #
-#    Updated: 2023/12/04 09:42:21 by tchartie         ###   ########.fr        #
+#    Updated: 2023/12/19 17:36:24 by tchartie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #============ NAME ============#
 
 NAME		=		push_swap
+NAME_BONUS	=		checker
 
 #========= COMPILATOR =========#
 
@@ -37,13 +38,17 @@ WHITE		=		\033[0;97m
 
 #========== SOURCES ===========#
 
-INCLUDE		=		src/push_swap.h			#Directory of headers
+INCLUDE_DIR	=		include
+INCLUDE		=		$(INCLUDE_DIR)/push_swap.h
+INCLUDE_B	=		$(INCLUDE_DIR)/checker.h
 
 LIBFT_DIR	=		libft
 LIBFT_NAME	=		libft.a
 
 SRCS_DIR	=		src/
+SRCS_B_DIR	=		src_bonus/
 OBJS_DIR	=		obj/
+OBJS_B_DIR	=		obj_bonus/
 
 SRCS		=		main.c \
 					append_stack.c \
@@ -57,10 +62,17 @@ SRCS		=		main.c \
 					sort_utils.c \
 					tiny_sort.c
 
+SRCS_BONUS	=		main.c \
+					get_next_line.c \
+					get_next_line_utils.c
+
 OBJS		=		$(SRCS:.c=.o)
+OBJS_BONUS	=		$(SRCS_BONUS:.c=.o)
 
 SRCS_F		=		$(addprefix $(SRCS_DIR),$(SRCS))
+SRCS_B_F	=		$(addprefix $(SRCS_B_DIR),$(SRCS_BONUS))
 OBJS_F		=		$(addprefix $(OBJS_DIR),$(OBJS))
+OBJS_B_F	=		$(addprefix $(OBJS_B_DIR),$(OBJS_BONUS))
 
 
 #========= EXECUTABLE =========#
@@ -71,27 +83,40 @@ makelibft :
 					@make -C $(LIBFT_DIR) all --no-print-directory
 
 $(NAME) : 			$(OBJS_F) | makelibft
-					@$(CC) $(OBJS_F) -o $(NAME) -Llibft -lft
+					@$(CC) $(OBJS_F) -o $(NAME) -Llibft -lft -I$(INCLUDE_DIR)
 					@echo "$(GREEN)Push_swap successfully compiled! $(BASE_COLOR)"
 
 $(OBJS_DIR)%.o :	$(SRCS_DIR)%.c $(INCLUDE)
 					@mkdir -p $(OBJS_DIR)
 					@echo "$(YELLOW)Compiling: $< $(BASE_COLOR)"
-					@$(CC) $(GFLAGS) -c $< -o $@
+					@$(CC) $(CFLAGS) -I$(INCLUDE_DIR) -c $< -o $@
+
+bonus :				$(OBJS_B_F) | all
+					@$(CC) $(OBJS_B_F) -o $(NAME_BONUS) -Llibft -lft -I$(INCLUDE_DIR)
+					@echo "$(GREEN)Checker successfully compiled! $(BASE_COLOR)"
+					
+
+$(OBJS_B_DIR)%.o :	$(SRCS_B_DIR)%.c $(INCLUDE_B) $(INCLUDE)
+					@mkdir -p $(OBJS_B_DIR)
+					@echo "$(YELLOW)Compiling $< $(BASE_COLOR)"
+					@$(CC) $(CFLAGS) -I$(INCLUDE_DIR) -c $< -o $@
 
 clean :
 					@rm -rf $(OBJS_DIR)
+					@rm -rf $(OBJS_B_DIR)
 					@make -C $(LIBFT_DIR) clean --no-print-directory
-					@echo "$(BLUE)Push_swap objects files cleanned! $(BASE_COLOR)"
+					@echo "$(BLUE)Push_swap & checker objects files cleanned! $(BASE_COLOR)"
 
 fclean :
 					@rm -rf $(OBJS_DIR)
-					@echo "$(BLUE)Push_swap objects files cleanned! $(BASE_COLOR)"
+					@rm -rf $(OBJS_B_DIR)
+					@echo "$(BLUE)Push_swap & checker objects files cleanned! $(BASE_COLOR)"
 					@rm -rf $(NAME)
+					@rm -rf $(NAME_BONUS)
 					@make -C $(LIBFT_DIR) fclean --no-print-directory
-					@echo "$(CYAN)Push_swap executable file cleanned! $(BASE_COLOR)"
+					@echo "$(CYAN)Push_swap & checker executable file cleanned! $(BASE_COLOR)"
 					
 
 re :				fclean all
 
-.PHONY :			all makelibft clean fclean re
+.PHONY :			all makelibft bonus clean fclean re

@@ -45,7 +45,8 @@ void			stack_init(t_stack_node **a, char **matrix, char *array);
 /*      Initialize all the nodes in the       */
 /*                given stack                 */
 /* ****************************************** */
-void			init_stack_utils(t_stack_node **a, t_stack_node **b);
+void			init_stack_utils_a(t_stack_node **a, t_stack_node **b);
+void			init_stack_utils_b(t_stack_node **a, t_stack_node **b);
 
 /* ****************************************** */
 /*            set_position_node()             */
@@ -64,14 +65,15 @@ void			set_position_node(t_stack_node **stack);
 /*       If there is no greater number,       */
 /*         point to the smallest one          */
 /* ****************************************** */
-void			set_target_node(t_stack_node **a, t_stack_node *b);
+void			set_target_node_a(t_stack_node *a, t_stack_node *b);
+void			set_target_node_b(t_stack_node *a, t_stack_node *b);
 
 /* ****************************************** */
 /*              set_price_node()              */
 /*        Take a stack and assign each        */
 /*    node its push cost (in instructions)    */
 /* ****************************************** */
-void			set_price_node(t_stack_node **a, t_stack_node *b);
+void			set_price_node_a(t_stack_node *a, t_stack_node *b);
 
 /* ****************************************** */
 /*            set_cheapest_node()             */
@@ -79,7 +81,7 @@ void			set_price_node(t_stack_node **a, t_stack_node *b);
 /*        the most economical to push         */
 /*           by examining its cost            */
 /* ****************************************** */
-void			set_cheapest_node(t_stack_node **stack);
+void			set_cheapest_node_a(t_stack_node **stack);
 
 /* ********************************************************** */
 /*                                                            */
@@ -130,8 +132,8 @@ void			free_stack(t_stack_node **stack);
 /*      Take a stack and return the node      */
 /*      with the smallest/largest value       */
 /* ****************************************** */
-t_stack_node	*find_biggest(t_stack_node **stack);
-t_stack_node	*find_smallest(t_stack_node **stack);
+t_stack_node	*find_biggest(t_stack_node *stack);
+t_stack_node	*find_smallest(t_stack_node *stack);
 
 /* ****************************************** */
 /*                size_stack()                */

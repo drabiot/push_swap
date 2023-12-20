@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   checker.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tchartie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 14:08:37 by tchartie          #+#    #+#             */
-/*   Updated: 2023/11/20 16:24:16 by tchartie         ###   ########.fr       */
+/*   Updated: 2023/12/20 18:52:35 by tchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef CHECKER_H
+# define CHECKER_H
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -72,11 +72,10 @@ int		new_line(char *str);
 /* ****************************************** */
 char	*ft_strjoin_gnl(char *s1, char *s2);
 
-
 /* ****************************************** */
 /*                 ft_strccpy                 */
 /*         Take a string and copy it          */
 /* ****************************************** */
 char	*ft_strccpy(char *dst, const char *src, int check_nl);
 
-#endif //GET_NEXT_LINE_H
+#endif //CHECKER_H

@@ -61,3 +61,17 @@ void	reverse_rotate_all(t_stack_node **a, t_stack_node **b)
 	reverse_rotate(b);
 	write (1, "rrr\n", 4);
 }
+
+/*
+** Reverse rotate the two given stack until one of the cheapest
+** node is on top of the stack 
+*/
+void	reverse_rotate_both(t_stack_node **a,
+			t_stack_node **b,
+			t_stack_node *cheapest)
+{
+	while (*a != cheapest->target && *b != cheapest)
+		reverse_rotate_all(a, b);
+	set_position_node(a);
+	set_position_node(b);
+}

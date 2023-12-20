@@ -51,18 +51,6 @@ SRCS_B_DIR	=		src_bonus/
 OBJS_DIR	=		obj/
 OBJS_A_DIR	=		obj_archive/
 OBJS_B_DIR	=		obj_bonus/
-
-SRCS		=		main.c \
-					append_stack.c \
-					error_check.c \
-					commands_utils.c \
-					swap_commands.c \
-					push_commands.c \
-					rotate_commands.c \
-					reverse_rotate_commands.c \
-					sort.c \
-					sort_utils.c \
-					tiny_sort.c
 					
 SRCS_ARCH	=		append_stack.c \
 					error_check.c \
@@ -72,8 +60,12 @@ SRCS_ARCH	=		append_stack.c \
 					rotate_commands.c \
 					reverse_rotate_commands.c \
 					sort.c \
-					sort_utils.c \
+					sort_utils_a.c \
+					sort_utils_b.c \
 					tiny_sort.c
+					
+SRCS		=		$(SRCS_ARCH)
+SRCS		+=		main.c
 
 SRCS_BONUS	=		main.c \
 					get_next_line.c \
@@ -108,7 +100,7 @@ $(NAME) : 			$(OBJS_F) | makelibft
 $(OBJS_DIR)%.o :	$(SRCS_DIR)%.c $(INCLUDE)
 					@mkdir -p $(OBJS_DIR)
 					@echo "$(YELLOW)Compiling: $< $(BASE_COLOR)"
-					@$(CC) $(CFLAGS) -I$(INCLUDE_DIR) -c $< -o $@
+					@$(CC) $(GFLAGS) -I$(INCLUDE_DIR) -c $< -o $@
 
 $(ARCHIVE) :		$(OBJS_ARCH_F) | makelibft
 					@ar -rcs $(ARCHIVE) $(OBJS_ARCH_F)
@@ -119,7 +111,7 @@ $(OBJS_A_DIR)%.o :	$(SRCS_DIR)%.c $(INCLUDE)
 					@echo "$(YELLOW)Compiling: $< $(BASE_COLOR)"
 					@$(CC) $(CFLAGS) -I$(INCLUDE_DIR) -c $< -o $@
 
-$(NAME_BONUS) :		$(OBJS_B_F) $(ARCHIVE) | makelibft all
+$(NAME_BONUS) :		$(OBJS_B_F) $(ARCHIVE) | all makelibft
 					@$(CC) $(OBJS_B_F) $(ARCHIVE) -o $(NAME_BONUS) -Llibft -lft -I$(INCLUDE_DIR)
 					@echo "$(GREEN)Checker successfully compiled! $(BASE_COLOR)"
 					@rm -rf $(ARCHIVE)

@@ -13,49 +13,31 @@
 #include "../include/push_swap.h"
 
 /*
-** Rotate the two given stack until one of the cheapest node
-** is on top of the stack 
+** Rotate or reverse rotate the two given stack until the cheapest node
+** or its target are on the top of the stack
 */
-void	rotate_both(t_stack_node **a,
-			t_stack_node **b,
-			t_stack_node *cheapest)
+void	set_rotate_node_a(t_stack_node **a, t_stack_node **b)
 {
-	while (*a != cheapest->target && *b != cheapest)
-		rotate_all(a, b);
-	set_position_node(a);
-	set_position_node(b);
-}
+	t_stack_node	*cheapest_node;
 
-/*
-** Reverse rotate the two given stack until one of the cheapest
-** node is on top of the stack 
-*/
-void	reverse_rotate_both(t_stack_node **a,
-			t_stack_node **b,
-			t_stack_node *cheapest)
-{
-	while (*a != cheapest->target && *b != cheapest)
-		reverse_rotate_all(a, b);
-	set_position_node(a);
-	set_position_node(b);
+	cheapest_node = return_cheapest(a);
+	if (cheapest_node->above_median && cheapest_node->target->above_median)
+		rotate_both(b, a, cheapest_node);
+	else if (!(cheapest_node->above_median)
+		&& !(cheapest_node->target->above_median))
+		reverse_rotate_both(b, a, cheapest_node);
+	finish_rotation(a, cheapest_node, 'a');
+	finish_rotation(b, cheapest_node->target, 'b');
+	push_b(b, a);
 }
 
 /*
 ** Rotate or reverse rotate the two given stack until the cheapest node
 ** or its target are on the top of the stack
 */
-void	set_rotate_node(t_stack_node **a, t_stack_node **b)
+void	set_rotate_node_b(t_stack_node **a, t_stack_node **b)
 {
-	t_stack_node	*cheapest_node;
-
-	cheapest_node = return_cheapest(b);
-	if (cheapest_node->above_median && cheapest_node->target->above_median)
-		rotate_both(a, b, cheapest_node);
-	else if (!(cheapest_node->above_median)
-		&& !(cheapest_node->target->above_median))
-		reverse_rotate_both(a, b, cheapest_node);
-	finish_rotation(b, cheapest_node, 'b');
-	finish_rotation(a, cheapest_node->target, 'a');
+	finish_rotation(a, (*b)->target, 'a');
 	push_a(a, b);
 }
 
@@ -85,18 +67,21 @@ void	sort(t_stack_node **a, t_stack_node **b)
 	t_stack_node	*smallest;
 
 	len_stack_a = size_stack(*a);
+	push_b(b, a);
+	push_b(b, a);
 	while (len_stack_a > 3)
 	{
-		push_b(b, a);
+		init_stack_utils_a(a, b);
+		set_rotate_node_a(a, b);
 		len_stack_a--;
 	}
 	tiny_sort(a);
 	while (*b)
 	{
-		init_stack_utils(a, b);
-		set_rotate_node(a, b);
+		init_stack_utils_b(a, b);
+		set_rotate_node_b(a, b);
 	}
 	set_position_node(a);
-	smallest = find_smallest(a);
+	smallest = find_smallest(*a);
 	smallest_on_top(a, smallest);
 }

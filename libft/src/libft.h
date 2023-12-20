@@ -156,7 +156,7 @@ char	*ft_strrchr(const char *s, int c);
 /* •a negative value if s1 is less than s2    */
 /* •a positive value if s1 is greater than s2 */
 /* ****************************************** */
-int 	ft_strcmp(char *s1, char *s2);
+int		ft_strcmp(char *s1, char *s2);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
 /* ****************************************** */

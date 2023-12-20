@@ -62,6 +62,22 @@ static void	instructions(t_stack_node **a, t_stack_node **b, char *instruction)
 	if (!ft_strcmp(instruction, "rrr\n"))
 		reverse_rotate_all(a, b);
 }
+
+static void	return_validation(t_stack_node **a, t_stack_node **b)
+{
+	if (is_sorted(*a) && size_stack(*b) == 0)
+		write (1, "OK\n", 3);
+	else
+		write (1, "KO\n", 3);
+}
+
+static void	free_main(t_stack_node **a, char **matrix, char *array)
+{
+	free_stack(a);
+	free(array);
+	free_matrix(matrix);
+}
+
 /*
 ** main
 */
@@ -84,14 +100,11 @@ int	main(int argc, char **argv)
 	while (line)
 	{
 		instructions(&a, &b, line);
+		if (line)
+			free(line);
 		line = get_next_line(0);
 	}
-	if (is_sorted(a) && size_stack(b) == 0)
-		write (1, "OK\n", 3);
-	else
-		write (1, "KO\n", 3);
-	free_stack(&a);
-	free(array);
-	free_matrix(matrix);
+	return_validation(&a, &b);
+	free_main(&a, matrix, array);
 	return (0);
 }

@@ -15,15 +15,15 @@
 /*
 ** Return the smallest node's value in the given stack
 */
-t_stack_node	*find_smallest(t_stack_node **stack)
+t_stack_node	*find_smallest(t_stack_node *stack)
 {
 	t_stack_node	*smallest_node;
 	t_stack_node	*head;
 	long			smallest;
 
-	if (!stack || !*stack)
+	if (!stack)
 		return (NULL);
-	head = *stack;
+	head = stack;
 	smallest = 2147483648;
 	while (head)
 	{
@@ -40,15 +40,15 @@ t_stack_node	*find_smallest(t_stack_node **stack)
 /*
 ** Return the biggest node's value in the given stack
 */
-t_stack_node	*find_biggest(t_stack_node **stack)
+t_stack_node	*find_biggest(t_stack_node *stack)
 {
 	t_stack_node	*biggest_node;
 	t_stack_node	*head;
 	long			biggest;
 
-	if (!stack || !*stack)
+	if (!stack)
 		return (NULL);
-	head = *stack;
+	head = stack;
 	biggest = -2147483649;
 	while (head)
 	{
@@ -95,7 +95,7 @@ void	tiny_sort(t_stack_node **stack)
 	if (!stack || !*stack)
 		return ;
 	len_stack = size_stack(*stack);
-	biggest_node = find_biggest(stack);
+	biggest_node = find_biggest(*stack);
 	if (!is_sorted(*stack))
 	{
 		if (len_stack == 2)
@@ -119,8 +119,8 @@ void	little_sort(t_stack_node **a, t_stack_node **b)
 {
 	while (size_stack(*a) > 3)
 	{
-		init_stack_utils(a, b);
-		finish_rotation(a, find_smallest(a), 'a');
+		init_stack_utils_b(a, b);
+		finish_rotation(a, find_smallest(*a), 'a');
 		push_b(b, a);
 	}
 }

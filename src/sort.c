@@ -58,24 +58,11 @@ static void	smallest_on_top(t_stack_node **a, t_stack_node *smallest)
 	}
 }
 
-/*
-** Sort the given stack a and put the smallest value on top
-*/
-void	sort(t_stack_node **a, t_stack_node **b)
+static void	flush_a_to_b(t_stack_node **a, t_stack_node **b)
 {
-	int				len_stack_a;
 	t_stack_node	*smallest;
 
-	len_stack_a = size_stack(*a);
-	push_b(b, a);
-	push_b(b, a);
-	while (len_stack_a > 3)
-	{
-		init_stack_utils_a(a, b);
-		set_rotate_node_a(a, b);
-		len_stack_a--;
-	}
-	tiny_sort(a);
+	smallest = NULL;
 	while (*b)
 	{
 		init_stack_utils_b(a, b);
@@ -84,4 +71,30 @@ void	sort(t_stack_node **a, t_stack_node **b)
 	set_position_node(a);
 	smallest = find_smallest(*a);
 	smallest_on_top(a, smallest);
+}
+
+/*
+** Sort the given stack a and put the smallest value on top
+*/
+void	sort(t_stack_node **a, t_stack_node **b)
+{
+	int				len_stack_a;
+	int				push;
+
+	push = 0;
+	len_stack_a = size_stack(*a);
+	while (len_stack_a > 3 && !is_sorted(*a) && push < 2)
+	{
+		push_b(b, a);
+		len_stack_a--;
+		push++;
+	}
+	while (len_stack_a > 3 && !is_sorted(*a))
+	{
+		init_stack_utils_a(a, b);
+		set_rotate_node_a(a, b);
+		len_stack_a--;
+	}
+	tiny_sort(a);
+	flush_a_to_b(a, b);
 }

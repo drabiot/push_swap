@@ -53,6 +53,8 @@ void	stack_init(t_stack_node **a, char **matrix, char *array)
 
 	nbr = 0;
 	i = 0;
+	if (!matrix || !*matrix)
+		error(a, matrix, array);
 	while (matrix[i])
 	{
 		if (!matrix[i])

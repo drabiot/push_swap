@@ -39,8 +39,6 @@ void	free_matrix(char **matrix)
 	int	i;
 
 	i = 0;
-	if (!matrix || !*matrix)
-		return ;
 	while (matrix[i])
 	{
 		free(matrix[i]);
@@ -54,9 +52,9 @@ void	free_matrix(char **matrix)
 */
 void	error(t_stack_node **stack, char **matrix, char *array)
 {
-	free_stack(stack);
 	free(array);
 	free_matrix(matrix);
+	free_stack(stack);
 	write(2, "Error\n", 6);
 	exit(1);
 }

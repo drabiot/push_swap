@@ -117,10 +117,20 @@ void	tiny_sort(t_stack_node **stack)
 */
 void	little_sort(t_stack_node **a, t_stack_node **b)
 {
-	while (size_stack(*a) > 3)
+	t_stack_node	*smallest;
+
+	if (!a || !*a)
+		return ;
+	smallest = find_smallest(*a);
+	while (size_stack(*a) > 3 && !is_sorted(*a) && size_stack(*b))
 	{
-		init_stack_utils_b(a, b);
-		finish_rotation(a, find_smallest(*a), 'a');
-		push_b(b, a);
+		if ((*a)->next == smallest)
+			rotate_a(a);
+		else
+		{
+			init_stack_utils_b(a, b);
+			finish_rotation(a, find_smallest(*a), 'a');
+			push_b(b, a);
+		}
 	}
 }
